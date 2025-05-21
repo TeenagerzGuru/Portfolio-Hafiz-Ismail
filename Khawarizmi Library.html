@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Hafiz Ismail</title>
+    <!-- Added Google Fonts for Press Start 2P and VT323 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Black and blue themed colors */
+            --primary: #0a1929;
+            --secondary: #003366;
+            --accent: #0077ff;
+            --light: #74b9ff;
+            --dark: #000000;
+            --text: #ffffff;
+            --highlight: #00a8ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--primary), var(--dark));
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text);
+            font-family: 'VT323', monospace;
+            font-size: 1.2rem;
+        }
+
+        h1, h2, h3, .back-button, .nav-btn {
+            font-family: 'Press Start 2P', cursive;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+            z-index: 100;
+            border: 2px solid var(--light);
+        }
+        
+        .back-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 119, 255, 0.5);
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+        }
+
+        .slider-container {
+            width: 100%;
+            max-width: 1200px;
+            height: 70vh;
+            position: relative;
+            overflow: hidden;
+            margin-top: 4rem;
+            border: 3px solid var(--accent);
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(0, 119, 255, 0.3);
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            height: 100%;
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .project-image {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 10px 20px rgba(0, 119, 255, 0.3);
+            border: 2px solid var(--accent);
+        }
+
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 100;
+            font-size: 1rem;
+            border: 2px solid var(--accent);
+        }
+
+        .nav-btn:hover {
+            background: var(--accent);
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 0 15px var(--accent);
+        }
+
+        .prev-btn {
+            left: 2rem;
+        }
+
+        .next-btn {
+            right: 2rem;
+        }
+
+        .caption {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 1.8rem;
+            color: var(--light);
+            font-family: 'Press Start 2P', cursive;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+            padding: 0.5rem;
+            letter-spacing: 1px;
+        }
+        
+        .project-description {
+            max-width: 800px;
+            margin: 4rem auto;
+            padding: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+            background-color: rgba(0, 51, 102, 0.2);
+            border: 2px solid var(--accent);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 119, 255, 0.2);
+        }
+
+        .project-description.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .description-title {
+            font-size: 1.8rem;
+            color: var(--light);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            letter-spacing: 1px;
+        }
+
+        .description-text {
+            font-size: 1.5rem;
+            line-height: 1.6;
+            color: var(--text);
+            text-align: justify;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .breadcrumbs {
+            padding: 15px 15%;
+            background-color: var(--dark);
+            border-top: 1px solid var(--accent);
+            margin-top: 30px;
+            width: 100%;
+        }
+        
+        .breadcrumbs-container {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .breadcrumbs a {
+            color: var(--light);
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+            font-family: 'VT323', monospace;
+        }
+        
+        .breadcrumbs a:hover {
+            color: var(--highlight);
+            text-decoration: underline;
+        }
+        
+        .breadcrumbs span {
+            color: var(--accent);
+            margin: 0 10px;
+            font-size: 1.2rem;
+        }
+        
+        .breadcrumbs .current {
+            color: var(--light);
+            font-size: 1.2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .breadcrumbs {
+                padding: 15px 5%;
+            }
+            
+            .description-title {
+                font-size: 1.4rem;
+            }
+            
+            .caption {
+                font-size: 1.2rem;
+            }
+            
+            .description-text {
+                font-size: 1.3rem;
+            }
+            
+            .nav-btn {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .back-button {
+                font-size: 0.6rem;
+                padding: 8px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="real-selected.html" class="back-button">
+        ← Back
+    </a>
+
+    <div class="slider-container">
+        <div class="slider">
+            <!-- Slide 1 -->
+            <div class="slide">
+                <img src="Library_2.png" 
+                     alt="Project 1" 
+                     class="project-image">
+            </div>
+            
+            <!-- Slide 2 -->
+            <div class="slide">
+                <img src="Library_3.png" 
+                     alt="Project 2" 
+                     class="project-image">
+            </div>
+            
+            <!-- Slide 3 -->
+            <div class="slide">
+                <img src="Library_4.png" 
+                     alt="Project 3" 
+                     class="project-image">
+            </div>
+        </div>
+        
+        <button class="nav-btn prev-btn" onclick="prevSlide()">❮</button>
+        <button class="nav-btn next-btn" onclick="nextSlide()">❯</button>
+    </div>
+
+    <div class="caption" id="caption">
+        Main Page Library
+    </div>
+
+    <div class="project-description" id="projectDesc">
+        <h2 class="description-title" id="descTitle">Project Title</h2>
+        <p class="description-text" id="descText">Project description</p>
+    </div>
+
+    <div class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="index.html">Home</a>
+            <span>></span>
+            <a href="real-selected.html">Selected Project</a>
+            <span>></span>
+            <span class="current">Khawarizmi Library</span>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slider = document.querySelector('.slider');
+        const slides = document.querySelectorAll('.slide');
+        const captions = [
+            "Main Page Library",
+            "Book List Interface",
+            "Library Borrowing System"
+        ];
+
+        function updateSlide() {
+            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+            document.getElementById('caption').textContent = captions[currentSlide];
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            updateSlide();
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            updateSlide();
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') prevSlide();
+            if (e.key === 'ArrowRight') nextSlide();
+        });
+
+        const descriptions = [
+            {
+                title: "Idea of Khawrizmi Library",
+                text: "This project is named after the great mathematician Al-Khwarizmi, reflecting the project’s goal of combining structured logic and educational value towards Library Management System at UNITAR."
+            },
+            {
+                title: "How we developed:",
+                text: "[Frontend:] HTML, CSS, JavaScript. Provides a responsive and interactive user interface for both librarians and users. [Backend:] ASP.NET (.NET Framework) Handles server-side logic, routing, and communication with the database. [Database:] Microsoft Access Used to store and manage library data such as books, users, transactions, and return history. Integrated via ODBC connection to the backend."
+            },
+            {
+                title: "Features",
+                text: "Book Catalog Management, Borrowing and Returning System, Search Functionality and Reports and Logs "
+            }
+        ];
+
+        // Add these variables
+        const projectDesc = document.getElementById('projectDesc');
+        const descTitle = document.getElementById('descTitle');
+        const descText = document.getElementById('descText');
+
+        // Modify the updateSlide function
+        function updateSlide() {
+            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+            document.getElementById('caption').textContent = captions[currentSlide];
+            
+            // Update description
+            descTitle.textContent = descriptions[currentSlide].title;
+            descText.textContent = descriptions[currentSlide].text;
+            
+            // Trigger animation
+            projectDesc.classList.remove('visible');
+            setTimeout(() => projectDesc.classList.add('visible'), 50);
+        }
+
+        // Add scroll reveal effect
+        window.addEventListener('scroll', () => {
+            const descPosition = projectDesc.getBoundingClientRect();
+            if (descPosition.top < window.innerHeight * 0.8) {
+                projectDesc.classList.add('visible');
+            }
+        });
+
+        // Initialize the first slide
+        updateSlide();
+    </script>
+</body>
+</html>

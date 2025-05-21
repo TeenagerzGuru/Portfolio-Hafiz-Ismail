@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selected Projects</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
+
+        :root {
+            --bg-color: #040f1f;
+            --text-color: #e0f0ff;
+            --accent-color: #4b9fff;
+            --secondary-color: #00e5ff;
+            --surface-color: #071b33;
+            --gradient-start: #081d35;
+            --gradient-end: #02080f;
+            --header-font: 'Press Start 2P', cursive;
+            --body-font: 'VT323', monospace;
+            --glow-color: rgba(0, 149, 255, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--body-font);
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: var(--text-color);
+            font-size: 1.2rem;
+            overflow-x: hidden;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, .back-button {
+            font-family: var(--header-font);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            line-height: 1.4;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: linear-gradient(135deg, #0055aa, #003366);
+            color: var(--secondary-color);
+            padding: 12px 20px;
+            border-radius: 0;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 0 15px var(--glow-color);
+            transition: all 0.3s ease;
+            z-index: 100;
+            font-size: 0.7rem;
+            border: 1px solid var(--secondary-color);
+        }
+        
+        .back-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 20px var(--accent-color);
+            text-shadow: 0 0 5px var(--accent-color);
+        }
+
+        .back-button:active {
+            transform: translateY(2px);
+            box-shadow: 0 0 10px var(--glow-color);
+        }
+
+        .title {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5rem;
+            z-index: 100;
+            text-shadow: 0 0 10px var(--glow-color);
+            color: var(--secondary-color);
+        }
+
+        /* Breadcrumbs */
+        .breadcrumbs {
+            position: fixed;
+            bottom: 20px;
+            left: 50%; 
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            font-size: 1rem;
+            z-index: 100;
+        }
+
+        .breadcrumbs a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-family: var(--body-font);
+            text-shadow: 0 0 5px var(--glow-color);
+        }
+
+        .breadcrumbs a:hover {
+            color: var(--secondary-color);
+            text-shadow: 0 0 8px var(--glow-color);
+        }
+
+        .breadcrumbs span {
+            color: rgba(225, 240, 255, 0.7);
+            font-family: var(--body-font);
+        }
+
+        .slider-container {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            padding: 100px 5% 20px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+
+        .slide.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .mac-container {
+            flex: 1;
+            max-width: 50%;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid var(--accent-color);
+            box-shadow: 0 0 20px var(--glow-color);
+        }
+
+        .mac-container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 30px var(--accent-color);
+        }
+
+        .content {
+            flex: 1;
+            max-width: 40%;
+            padding: 20px;
+            background-color: rgba(7, 27, 51, 0.6);
+            border: 1px solid var(--accent-color);
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 100, 255, 0.2);
+        }
+
+        .content h2 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px var(--glow-color);
+            color: var(--secondary-color);
+        }
+
+        .content p {
+            margin-bottom: 10px;
+            line-height: 1.6;
+            font-size: 1.4rem;
+        }
+
+        /* Pagination */
+        .pagination {
+            position: fixed;
+            bottom: 50px;
+            right: 50px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+
+        .dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 0;
+            background-color: rgba(75, 159, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid var(--accent-color);
+            box-shadow: 0 0 5px var(--glow-color);
+        }
+
+        .dot.active {
+            background-color: var(--accent-color);
+            box-shadow: 0 0 10px var(--accent-color);
+        }
+
+        /* Navigation Arrows */
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            color: var(--secondary-color);
+            cursor: pointer;
+            z-index: 100;
+            padding: 15px;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+            font-family: var(--header-font);
+            background: linear-gradient(135deg, #0055aa, #003366);
+            border: 1px solid var(--secondary-color);
+            box-shadow: 0 0 15px var(--glow-color);
+            text-shadow: 0 0 5px var(--glow-color);
+        }
+
+        .arrow:hover {
+            opacity: 1;
+            box-shadow: 0 0 25px var(--accent-color);
+            text-shadow: 0 0 10px var(--accent-color);
+        }
+
+        .arrow:active {
+            transform: translateY(-50%) scale(0.95);
+            box-shadow: 0 0 10px var(--glow-color);
+        }
+
+        .prev {
+            left: 20px;
+        }
+
+        .next {
+            right: 20px;
+        }
+
+        .breadcrumbs-container {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .breadcrumbs a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+        
+        .breadcrumbs a:hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+        }
+        
+        .breadcrumbs span {
+            color: #4a7297;
+            margin: 0 10px;
+            font-size: 1rem;
+        }
+        
+        .breadcrumbs .current {
+            color: #87c3ff;
+            font-size: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 1rem;
+                width: 100%;
+                text-align: center;
+            }
+
+            .back-button {
+                font-size: 0.6rem;
+                padding: 8px 12px;
+                top: 10px;
+                left: 10px;
+            }
+
+            .breadcrumbs {
+                padding: 15px 5%;
+                font-size: 0.8rem;
+            }
+            
+            .breadcrumbs a, 
+            .breadcrumbs span, 
+            .breadcrumbs .current {
+                font-size: 0.8rem;
+            }
+
+            .slide {
+                flex-direction: column;
+                padding-top: 70px;
+            }
+
+            .mac-container, .content {
+                max-width: 90%;
+            }
+
+            .content {
+                text-align: center;
+            }
+            
+            .content h2 {
+                font-size: 1.2rem;
+            }
+            
+            .content p {
+                font-size: 1.2rem;
+            }
+
+            .pagination {
+                right: 50%;
+                transform: translateX(50%);
+                bottom: 20px;
+            }
+
+            .arrow {
+                font-size: 1.2rem;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Home Button -->
+    <a href="index.html" class="back-button">
+        ← BACK TO MAIN
+    </a>
+
+    <h1 class="title">SELECTED PROJECT</h1>
+    
+    <!-- Navigation Arrows -->
+    <div class="arrow prev">❮</div>
+    <div class="arrow next">❯</div>
+
+    <!-- Slider container -->
+    <div class="slider-container">
+        <!-- Khawarizmi Library Slide -->
+        <div class="slide active">
+            <a href="Khawarizmi Library.html" class="mac-container">
+                <img src="Preview_Library_bg.png" alt="Khawarizmi Library" style="width: 100%">
+            </a>
+            <div class="content">
+                <h2>KHAWARIZMI LIBRARY</h2>
+                <p>The description:</p>
+                <p>Khawarizmi Library System is a modern and user-friendly library management solution designed to efficiently organize, track, and manage books and users at UNITAR.</p>
+                <p>The system allows librarians to easily catalog books, manage borrow and return transactions, and monitor overdue items.</p>
+                <p>sers can browse the digital catalog, search for books by title, author, or genre, and check availability in real-time.</p>
+            </div>
+        </div>
+
+        <!-- Traffic Chaos Slide -->
+        <div class="slide">
+            <a href="Traffic Chaos.html" class="mac-container">
+                <img src="Preview_TC_bg.png" alt="Traffic Chaos" style="width: 100%">
+            </a>
+            <div class="content">
+                <h2>TRAFFIC CHAOS</h2>
+                <p>The description:</p>
+                <p>Traffic Chaos is an endless highway game to avoid traffic.</p>
+                <p>Player will face three type of terrain which is: Desert, Antartica and Summer.</p>
+                <p>To control by using W - forward, S - slow down, A - left turn, D - right turn. Space - Handbrake</p>
+                <p>Automatically update the highscore</p>
+                <p>Be alert and avoid the traffic!</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="index.html">Home</a>
+            <span>></span>
+            <span class="current">Selected Project</span>
+        </div>
+    </div>
+
+    <!-- Pagination dots -->
+    <div class="pagination">
+        <div class="dot active" data-index="0"></div>
+        <div class="dot" data-index="1"></div>
+    </div>
+
+    <script>
+        // Get DOM elements
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        const prevBtn = document.querySelector('.prev');
+        const nextBtn = document.querySelector('.next');
+        
+        let currentIndex = 0;
+        const totalSlides = slides.length;
+
+        // Function to show a specific slide
+        function showSlide(index) {
+            // Hide all slides
+            slides.forEach(slide => {
+                slide.classList.remove('active');
+            });
+            
+            // Deactivate all dots
+            dots.forEach(dot => {
+                dot.classList.remove('active');
+            });
+            
+            // Show selected slide and activate corresponding dot
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
+            
+            currentIndex = index;
+        }
+
+        // Event listeners for dots
+        dots.forEach(dot => {
+            dot.addEventListener('click', function() {
+                const index = parseInt(this.getAttribute('data-index'));
+                showSlide(index);
+            });
+        });
+
+        // Event listeners for arrow buttons
+        prevBtn.addEventListener('click', function() {
+            let newIndex = currentIndex - 1;
+            if (newIndex < 0) newIndex = totalSlides - 1;
+            showSlide(newIndex);
+        });
+
+        nextBtn.addEventListener('click', function() {
+            let newIndex = currentIndex + 1;
+            if (newIndex >= totalSlides) newIndex = 0;
+            showSlide(newIndex);
+        });
+
+        // Initialize with the first slide
+        showSlide(0);
+        
+        // Optional: Add keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') {
+                prevBtn.click();
+            } else if (e.key === 'ArrowRight') {
+                nextBtn.click();
+            }
+        });
+        
+        // Add simple click sound effect
+        function addClickSound() {
+            const clickSound = new Audio('data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAB8AB0A');
+            
+            document.querySelectorAll('a, .dot, .arrow').forEach(element => {
+                element.addEventListener('click', () => {
+                    clickSound.currentTime = 0;
+                    clickSound.play().catch(e => {});
+                });
+            });
+        }
+        
+        // Try to add sound if browser supports it
+        try {
+            addClickSound();
+        } catch (e) {
+            console.log('Sound not supported in this browser');
+        }
+    </script>
+</body>
+</html>

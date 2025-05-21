@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Immersive Video Player</title>
+    <!-- Google Fonts for gaming aesthetic -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #040f1f;
+            --text-color: #e0f0ff;
+            --accent-color: #4b9fff;
+            --secondary-color: #00e5ff;
+            --surface-color: #071b33;
+            --gradient-start: #081d35;
+            --gradient-end: #02080f;
+            --heading-font: 'Press Start 2P', cursive;
+            --body-font: 'VT323', monospace;
+            --glow-color: rgba(0, 149, 255, 0.5);
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: var(--text-color);
+            font-family: var(--body-font);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 20px;
+        }
+        
+        h1, h2, h3, button, a {
+            font-family: var(--heading-font);
+            letter-spacing: 1px;
+        }
+        
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: linear-gradient(135deg, #0055aa, #003366);
+            color: var(--secondary-color);
+            padding: 10px 20px;
+            border-radius: 0px;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 0 15px var(--glow-color);
+            transition: all 0.3s ease;
+            z-index: 100;
+            font-size: 12px;
+            border: 1px solid var(--secondary-color);
+        }
+        
+        .back-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 20px var(--accent-color);
+            text-shadow: 0 0 5px var(--accent-color);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        
+        .video-container {
+            position: relative;
+            width: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 25px var(--glow-color);
+            margin-bottom: 30px;
+            background-color: black;
+            border: 2px solid var(--accent-color);
+        }
+        
+        video {
+            width: 100%;
+            display: block;
+        }
+        
+        .controls-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 15, 30, 0.8));
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .video-container:hover .controls-overlay {
+            opacity: 1;
+        }
+        
+        .play-button {
+            background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
+            color: #000;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 3px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 12px;
+            box-shadow: 0 0 15px rgba(0, 149, 255, 0.7);
+            text-shadow: none;
+        }
+        
+        .play-button:hover {
+            box-shadow: 0 0 25px rgba(0, 225, 255, 0.9);
+            transform: scale(1.05);
+        }
+        
+        .description-container {
+            background-color: var(--surface-color);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 100, 255, 0.2);
+            margin-bottom: 30px;
+            width: 100%;
+            border: 1px solid var(--accent-color);
+        }
+        
+        .description-container h2 {
+            color: var(--secondary-color);
+            margin-top: 0;
+            font-size: 18px;
+            border-bottom: 1px solid var(--accent-color);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+            text-shadow: 0 0 5px var(--glow-color);
+        }
+        
+        .description-content {
+            min-height: 150px;
+            line-height: 1.4;
+        }
+        
+        .page-title {
+            width: 100%;
+            text-align: center;
+            margin: 50px 0 30px 0;
+            font-size: 22px;
+            color: var(--secondary-color);
+            text-shadow: 0 0 15px var(--glow-color);
+        }
+        
+        /* Ambient background animation */
+        .ambient-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 50% 50%, var(--gradient-start), var(--gradient-end));
+            opacity: 0.8;
+        }
+        
+        /* Video title style */
+        .video-title {
+            margin: 0;
+            padding: 15px 0;
+            text-align: center;
+            font-size: 20px;
+            color: var(--accent-color);
+            text-shadow: 0 0 10px var(--glow-color);
+        }
+
+        .breadcrumbs {
+            padding: 15px 15%;
+            background-color: rgba(7, 27, 51, 0.8);
+            border-top: 1px solid var(--accent-color);
+            margin-top: 30px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .breadcrumbs-container {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .breadcrumbs a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+            text-shadow: 0 0 5px var(--glow-color);
+        }
+        
+        .breadcrumbs a:hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+            text-shadow: 0 0 8px var(--glow-color);
+        }
+        
+        .breadcrumbs span {
+            color: #4a7297;
+            margin: 0 10px;
+            font-size: 14px;
+            font-family: var(--heading-font);
+        }
+        
+        .breadcrumbs .current {
+            color: #87c3ff;
+            font-size: 14px;
+            font-family: var(--heading-font);
+        }
+        
+        @media (max-width: 768px) {
+            .breadcrumbs {
+                padding: 15px 5%;
+            }
+            
+            .page-title {
+                font-size: 18px;
+            }
+            
+            .video-title {
+                font-size: 16px;
+            }
+            
+            .description-container h2 {
+                font-size: 14px;
+            }
+            
+            .play-button {
+                font-size: 10px;
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="real-selected.html" class="back-button">
+        ← Back
+    </a>
+
+    
+    <div class="ambient-background"></div>
+    
+    <h1 class="page-title">Immersive Video Experience</h1>
+    
+    <div class="container">
+        <h2 class="video-title">Traffic Chaos</h2>
+        
+        <div class="video-container">
+            <video id="myVideo" controls muted>
+                <source src="Traffic Chaos.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="controls-overlay">
+                <button class="play-button" onclick="unmuteAndPlay()">Play Video</button>
+            </div>
+        </div>
+        
+        <div class="description-container">
+            <h2>Video Description</h2>
+            <div class="description-content">
+                <p>Traffic Chaos is an endless highway game where players drive along a busy road, avoiding traffic and potholes while collecting coins.</p>
+                <p>The objective is to achieve the highest score possible, which is calculated based on the number of coins collected.</p>
+                <p>The game features a 2D top-down view and is developed fully using C++ with OpenGL and GLUT libraries.</p>
+                <p>It is not using database since all the high score data keep locally.</p>
+                <p>It was created as part of the Game Engine Development course to help us understand the inner workings of game engines through hands-on experience.</p>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="index.html">Home</a>
+            <span>></span>
+            <a href="real-selected.html">Selected Project</a>
+            <span>></span>
+            <span class="current">Traffic Chaos</span>
+        </div>
+    </div>
+
+    <script>
+        function unmuteAndPlay() {
+            const video = document.getElementById('myVideo');
+            video.muted = false; // Unmute the video
+            video.play(); // Start playback
+            
+            // Add a subtle animation effect when playing
+            document.querySelector('.video-container').style.boxShadow = '0 0 35px rgba(0, 149, 255, 0.8)';
+            setTimeout(() => {
+                document.querySelector('.video-container').style.boxShadow = '0 0 25px rgba(0, 149, 255, 0.5)';
+            }, 1000);
+        }
+        
+        // Initialize video with hover effects
+        document.addEventListener('DOMContentLoaded', function() {
+            const video = document.getElementById('myVideo');
+            
+            // Add pause/play functionality when clicking on video
+            video.addEventListener('click', function() {
+                if (video.paused) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
