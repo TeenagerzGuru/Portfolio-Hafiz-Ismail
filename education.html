@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Professional Experiences</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
+
+        :root {
+            --header-font: 'Press Start 2P', cursive;
+            --body-font: 'VT323', monospace;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--body-font);
+        }
+        
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            line-height: 1.6;
+            font-size: 1.2rem;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: linear-gradient(135deg, #4b6cb7, #182848);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 0px;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            z-index: 100;
+            font-family: var(--header-font);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+        }
+    
+        .back-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(79, 174, 255, 0.3);
+        }
+        
+        .section {
+            padding: 80px 15%;
+        }
+        
+        h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 40px;
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(79, 174, 255, 0.3);
+            position: relative;
+            font-family: var(--header-font);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #4b6cb7, #182848);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background-color: #1e1e1e;
+            border-radius: 15px;
+            padding: 30px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid #333;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(79, 174, 255, 0.2);
+            border: 1px solid #4b6cb7;
+        }
+        
+        .service-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: #4b6cb7;
+            font-family: var(--header-font);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            line-height: 1.4;
+        }
+        
+        .service-card p {
+            color: #b0b0b0;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+        
+        .image-container {
+            width: 100%;
+            height: 200px;
+            background-color: #2a2a2a;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .image-container:hover img {
+            transform: scale(1.05);
+        }
+        
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .image-container:hover .image-overlay {
+            opacity: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .section {
+                padding: 50px 5%;
+            }
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .breadcrumbs {
+            padding: 15px 15%;
+            background-color: #1a1a1a;
+            border-top: 1px solid #333;
+            margin-top: 30px;
+        }
+    
+        .breadcrumbs-container {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+    
+        .breadcrumbs a {
+            color: #4b6cb7;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+            font-family: var(--body-font);
+        }
+    
+        .breadcrumbs a:hover {
+            color: #7a9ce5;
+            text-decoration: underline;
+        }
+    
+        .breadcrumbs span {
+            color: #777;
+            margin: 0 10px;
+            font-size: 1rem;
+            font-family: var(--body-font);
+        }
+    
+        .breadcrumbs .current {
+            color: #b0b0b0;
+            font-size: 1rem;
+            font-family: var(--body-font);
+        }
+    
+        @media (max-width: 768px) {
+            .breadcrumbs {
+                padding: 15px 5%;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            .service-card h3 {
+                font-size: 1.2rem;
+            }
+            
+            .service-card p {
+                font-size: 1.2rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Back Button -->
+    <a href="index.html" class="back-button">
+        ← Back to Main
+    </a>
+    <!-- Experiences Section -->
+    <section id="services" class="section">
+        <h2>My Education</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="image-container">
+                    <img src="Education_UTEM.jpg  " alt="UTeM">
+                    <div class="image-overlay"></div>
+                </div>
+                <h3>Bachelor of IT (Game Technology)</h3>
+                <p><strong>Universiti Teknikal Malaysia Melaka (UTeM)</strong></p>
+                <p>2024 - Current</p>
+                <p>Gaining strong foundations in game design & development, Human-Computer Interaction tailored for game and interactive media applications.
+                     Developing practical skills through project-based learning in game engines, game mechanics, and game architecture.
+                     Enhancing critical thinking, creativity, and technical problem-solving in a collaborative environment.</p>
+                <p>CGPA: 3.59</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="image-container">
+                    <img src="Education_UNITAR.jpg" alt="Convo Diploma">
+                    <div class="image-overlay"></div>
+                </div>
+                <h3>Diploma of IT</h3>
+                <p><strong>Tuanku Abdul Razak International University (UNITAR)</strong></p>
+                <p>2021 - 2023</p>
+                <p>Built a solid base in networking, IT support, and system security. Learned how to manage IP services, perform basic automation scripting, and troubleshoot hardware/software issues.
+                     Gained hands-on experience in maintaining IT infrastructure and supporting end users, which directly shaped professional readiness in tech environments.</p>
+                <p>CGPA: 3.72</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="image-container">
+                    <img src="Education_SMKAP.jpg" alt="Taking SPM Cert">
+                    <div class="image-overlay"></div>
+                </div>
+                <h3>SPM - Pure Science</h3>
+                <p><strong>SMKA Pagoh</strong></p>
+                <p>2018 - 2020</p>
+                <p>Developed analytical and scientific thinking through a curriculum focused on Mathematics, Physics, Biology, and Chemistry. 
+                    Built a strong academic foundation that fostered discipline, time management, and structured problem-solving, which helped transition effectively into the IT and tech domain.</p>
+                <p>SPM: 7A 2B</p>
+            </div>
+        </div>
+
+        <div class="breadcrumbs">
+            <div class="breadcrumbs-container">
+                <a href="index.html">Home</a>
+                <span>></span>
+                <span class="current">Experiences</span>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
