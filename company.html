@@ -24,16 +24,17 @@
             line-height: 1.6;
             font-family: var(--body-font);
             font-size: 1.2rem;
+            overflow-x: hidden;
         }
         
         .back-button {
             position: fixed;
-            top: 20px;
-            left: 20px;
+            top: 15px;
+            left: 15px;
             background: linear-gradient(135deg, #4b6cb7, #182848);
             color: white;
-            padding: 10px 20px;
-            border-radius: 0px;
+            padding: 12px 20px;
+            border-radius: 8px;
             text-decoration: none;
             font-weight: 600;
             display: flex;
@@ -43,34 +44,43 @@
             transition: all 0.3s ease;
             z-index: 100;
             font-family: var(--body-font);
+            font-size: 1rem;
+            min-height: 44px; /* Touch target minimum */
+            justify-content: center;
         }
         
-        .back-button:hover {
-            transform: translateY(-3px);
+        .back-button:hover,
+        .back-button:active {
+            transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(79, 174, 255, 0.3);
+            background: linear-gradient(135deg, #5a7bc7, #283858);
         }
         
         .section {
-            padding: 80px 15%;
+            padding: 100px 20px 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
         
         h2 {
             text-align: center;
-            font-size: 2rem;
+            font-size: clamp(1.3rem, 4vw, 2rem);
             margin-bottom: 40px;
             color: #ffffff;
             text-shadow: 0 0 10px rgba(79, 174, 255, 0.3);
             position: relative;
             font-family: var(--header-font);
+            line-height: 1.3;
+            padding: 0 10px;
         }
         
         h2::after {
             content: '';
             position: absolute;
-            width: 100px;
-            height: 4px;
+            width: 80px;
+            height: 3px;
             background: linear-gradient(90deg, #4b6cb7, #182848);
-            bottom: -10px;
+            bottom: -15px;
             left: 50%;
             transform: translateX(-50%);
             border-radius: 2px;
@@ -78,39 +88,56 @@
         
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: 1fr;
+            gap: 25px;
+            margin-top: 50px;
         }
         
         .service-card {
             background-color: #1e1e1e;
             border-radius: 15px;
-            padding: 30px;
+            padding: 25px 20px;
             transition: transform 0.3s, box-shadow 0.3s;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
             display: flex;
             flex-direction: column;
             overflow: hidden;
             border: 1px solid #333;
+            position: relative;
         }
         
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(79, 174, 255, 0.2);
+        .service-card:hover,
+        .service-card:active {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(79, 174, 255, 0.2);
             border: 1px solid #4b6cb7;
         }
         
         .service-card h3 {
-            font-size: 1.4rem;
+            font-size: clamp(1rem, 3vw, 1.3rem);
             margin-bottom: 15px;
             color: #4b6cb7;
             font-family: var(--header-font);
+            line-height: 1.4;
         }
         
         .service-card p {
             color: #b0b0b0;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             font-family: var(--body-font);
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+        
+        .service-card p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .service-card p strong {
+            color: #e0e0e0;
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.05rem;
         }
         
         .image-container {
@@ -130,11 +157,12 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s;
+            transition: transform 0.5s ease;
         }
         
-        .image-container:hover img {
-            transform: scale(1.05);
+        .service-card:hover .image-container img,
+        .service-card:active .image-container img {
+            transform: scale(1.03);
         }
         
         .image-overlay {
@@ -143,66 +171,196 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 50%);
+            background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 50%);
             opacity: 0;
-            transition: opacity 0.3s;
+            transition: opacity 0.3s ease;
         }
         
-        .image-container:hover .image-overlay {
+        .service-card:hover .image-overlay,
+        .service-card:active .image-overlay {
             opacity: 1;
-        }
-        
-        @media (max-width: 768px) {
-            .section {
-                padding: 50px 5%;
-            }
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
         }
 
         .breadcrumbs {
-            padding: 15px 15%;
+            padding: 20px;
             background-color: #1a1a1a;
             border-top: 1px solid #333;
-            margin-top: 30px;
+            margin-top: 40px;
+            border-radius: 10px 10px 0 0;
         }
         
         .breadcrumbs-container {
             display: flex;
             align-items: center;
             flex-wrap: wrap;
+            justify-content: center;
         }
         
         .breadcrumbs a {
             color: #4b6cb7;
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 1rem;
             transition: color 0.3s ease;
             font-family: var(--body-font);
+            padding: 5px 10px;
+            border-radius: 5px;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
         }
         
-        .breadcrumbs a:hover {
+        .breadcrumbs a:hover,
+        .breadcrumbs a:active {
             color: #7a9ce5;
-            text-decoration: underline;
+            background-color: rgba(75, 108, 183, 0.1);
         }
         
         .breadcrumbs span {
             color: #777;
-            margin: 0 10px;
-            font-size: 0.9rem;
+            margin: 0 5px;
+            font-size: 1rem;
             font-family: var(--body-font);
         }
         
         .breadcrumbs .current {
             color: #b0b0b0;
-            font-size: 0.9rem;
+            font-size: 1rem;
             font-family: var(--body-font);
         }
         
-        @media (max-width: 768px) {
+        /* Desktop styles */
+        @media (min-width: 768px) {
+            .section {
+                padding: 120px 40px 80px 40px;
+            }
+            
+            .services-grid {
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+                gap: 30px;
+            }
+            
+            .service-card {
+                padding: 30px;
+            }
+            
+            .service-card:hover {
+                transform: translateY(-10px);
+            }
+            
+            .back-button {
+                top: 20px;
+                left: 20px;
+                padding: 12px 24px;
+            }
+            
             .breadcrumbs {
-                padding: 15px 5%;
+                padding: 20px 40px;
+            }
+            
+            .breadcrumbs-container {
+                justify-content: flex-start;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .section {
+                padding: 120px 60px 80px 60px;
+            }
+            
+            .services-grid {
+                grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            }
+            
+            h2::after {
+                width: 100px;
+                height: 4px;
+            }
+        }
+
+        /* Very small screens */
+        @media (max-width: 480px) {
+            .section {
+                padding: 90px 15px 50px 15px;
+            }
+            
+            .service-card {
+                padding: 20px 15px;
+            }
+            
+            .back-button {
+                top: 10px;
+                left: 10px;
+                padding: 10px 16px;
+                font-size: 0.9rem;
+            }
+            
+            .image-container {
+                height: 180px;
+            }
+            
+            h2 {
+                margin-bottom: 30px;
+            }
+        }
+
+        /* Landscape mobile orientation */
+        @media (max-height: 600px) and (orientation: landscape) {
+            .section {
+                padding: 80px 20px 40px 20px;
+            }
+            
+            h2 {
+                margin-bottom: 30px;
+            }
+            
+            .services-grid {
+                margin-top: 30px;
+            }
+        }
+
+        /* High DPI displays */
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            .back-button {
+                border: 0.5px solid rgba(255, 255, 255, 0.1);
+            }
+        }
+
+        /* Accessibility improvements */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Focus styles for keyboard navigation */
+        .back-button:focus,
+        .breadcrumbs a:focus {
+            outline: 2px solid #4b6cb7;
+            outline-offset: 2px;
+        }
+
+        .service-card:focus-within {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(79, 174, 255, 0.2);
+            border: 1px solid #4b6cb7;
+        }
+
+        /* Touch-friendly improvements */
+        @media (pointer: coarse) {
+            .service-card {
+                margin-bottom: 5px; /* Extra space between cards for easier scrolling */
+            }
+            
+            .back-button {
+                min-width: 44px;
+                min-height: 44px;
+            }
+            
+            .breadcrumbs a {
+                min-height: 44px;
+                min-width: 44px;
             }
         }
     </style>
@@ -210,16 +368,16 @@
 <body>
     <!-- Back Button -->
     <a href="index.html" class="back-button">
-        ← Back to Main
+        ← Back
     </a>
     
     <!-- Experiences Section -->
     <section id="services" class="section">
         <h2>My Experiences</h2>
         <div class="services-grid">
-            <div class="service-card">
+            <div class="service-card" tabindex="0">
                 <div class="image-container">
-                    <img src="Experience_Emr (1).jpg" alt="IT Service Delivery at Emerson Malaysia">
+                    <img src="Experience_Emr (1).jpg" alt="IT Service Delivery at Emerson Malaysia" loading="lazy">
                     <div class="image-overlay"></div>
                 </div>
                 <h3>IT Service Delivery @Emerson Malaysia</h3>
@@ -231,9 +389,9 @@
                     Prioritized support tickets based on impact and urgency to maintain global IT service excellence.</p>
             </div>
             
-            <div class="service-card">
+            <div class="service-card" tabindex="0">
                 <div class="image-container">
-                    <img src="Experience_IA.jpg" alt="IT Infrastructure at Inspirasi Amira">
+                    <img src="Experience_IA.jpg" alt="IT Infrastructure at Inspirasi Amira" loading="lazy">
                     <div class="image-overlay"></div>
                 </div>
                 <h3>IT Infrastructure @Inspirasi Amira</h3>
@@ -244,9 +402,9 @@
                      Delivered consistent IT support to enhance system reliability and user productivity.</p>
             </div>
             
-            <div class="service-card">
+            <div class="service-card" tabindex="0">
                 <div class="image-container">
-                    <img src="Experience_PSP (2).jpg" alt="IT Support at PS Pipeline">
+                    <img src="Experience_PSP (2).jpg" alt="IT Support at PS Pipeline" loading="lazy">
                     <div class="image-overlay"></div>
                 </div>
                 <h3>IT Support @PS Pipeline</h3>
