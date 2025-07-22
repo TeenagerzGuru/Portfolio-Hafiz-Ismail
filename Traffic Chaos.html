@@ -22,6 +22,10 @@
             --glow-color: rgba(0, 149, 255, 0.5);
         }
         
+        * {
+            box-sizing: border-box;
+        }
+        
         body {
             background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
             color: var(--text-color);
@@ -32,7 +36,8 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            font-size: 20px;
+            font-size: 18px;
+            line-height: 1.5;
         }
         
         h1, h2, h3, button, a {
@@ -42,11 +47,11 @@
         
         .back-button {
             position: fixed;
-            top: 20px;
-            left: 20px;
+            top: 15px;
+            left: 15px;
             background: linear-gradient(135deg, #0055aa, #003366);
             color: var(--secondary-color);
-            padding: 10px 20px;
+            padding: 12px 18px;
             border-radius: 0px;
             text-decoration: none;
             font-weight: 600;
@@ -56,12 +61,13 @@
             box-shadow: 0 0 15px var(--glow-color);
             transition: all 0.3s ease;
             z-index: 100;
-            font-size: 12px;
+            font-size: 10px;
             border: 1px solid var(--secondary-color);
+            touch-action: manipulation;
         }
         
-        .back-button:hover {
-            transform: translateY(-3px);
+        .back-button:hover, .back-button:focus {
+            transform: translateY(-2px);
             box-shadow: 0 0 20px var(--accent-color);
             text-shadow: 0 0 5px var(--accent-color);
         }
@@ -69,8 +75,8 @@
         .container {
             width: 100%;
             max-width: 1000px;
-            padding: 20px;
-            box-sizing: border-box;
+            padding: 15px;
+            margin-top: 60px;
         }
         
         .video-container {
@@ -79,58 +85,24 @@
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 0 25px var(--glow-color);
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             background-color: black;
             border: 2px solid var(--accent-color);
         }
         
         video {
             width: 100%;
+            height: auto;
             display: block;
-        }
-        
-        .controls-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(transparent, rgba(0, 15, 30, 0.8));
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .video-container:hover .controls-overlay {
-            opacity: 1;
-        }
-        
-        .play-button {
-            background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
-            color: #000;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 3px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 12px;
-            box-shadow: 0 0 15px rgba(0, 149, 255, 0.7);
-            text-shadow: none;
-        }
-        
-        .play-button:hover {
-            box-shadow: 0 0 25px rgba(0, 225, 255, 0.9);
-            transform: scale(1.05);
+            min-height: 200px;
         }
         
         .description-container {
             background-color: var(--surface-color);
-            padding: 30px;
+            padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 20px rgba(0, 100, 255, 0.2);
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             width: 100%;
             border: 1px solid var(--accent-color);
         }
@@ -138,25 +110,34 @@
         .description-container h2 {
             color: var(--secondary-color);
             margin-top: 0;
-            font-size: 18px;
+            font-size: 14px;
             border-bottom: 1px solid var(--accent-color);
-            padding-bottom: 15px;
-            margin-bottom: 20px;
+            padding-bottom: 12px;
+            margin-bottom: 15px;
             text-shadow: 0 0 5px var(--glow-color);
         }
         
         .description-content {
-            min-height: 150px;
-            line-height: 1.4;
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        
+        .description-content p {
+            margin: 0 0 15px 0;
+        }
+        
+        .description-content p:last-child {
+            margin-bottom: 0;
         }
         
         .page-title {
             width: 100%;
             text-align: center;
-            margin: 50px 0 30px 0;
-            font-size: 22px;
+            margin: 20px 0 25px 0;
+            font-size: 16px;
             color: var(--secondary-color);
             text-shadow: 0 0 15px var(--glow-color);
+            padding: 0 15px;
         }
         
         /* Ambient background animation */
@@ -173,76 +154,214 @@
         
         /* Video title style */
         .video-title {
-            margin: 0;
-            padding: 15px 0;
+            margin: 0 0 20px 0;
+            padding: 0;
             text-align: center;
-            font-size: 20px;
+            font-size: 16px;
             color: var(--accent-color);
             text-shadow: 0 0 10px var(--glow-color);
         }
 
         .breadcrumbs {
-            padding: 15px 15%;
+            padding: 15px;
             background-color: rgba(7, 27, 51, 0.8);
             border-top: 1px solid var(--accent-color);
-            margin-top: 30px;
+            margin-top: 25px;
             width: 100%;
-            box-sizing: border-box;
         }
         
         .breadcrumbs-container {
             display: flex;
             align-items: center;
             flex-wrap: wrap;
+            justify-content: center;
         }
         
         .breadcrumbs a {
             color: var(--accent-color);
             text-decoration: none;
-            font-size: 14px;
+            font-size: 10px;
             transition: color 0.3s ease;
             text-shadow: 0 0 5px var(--glow-color);
+            padding: 5px;
+            border-radius: 3px;
+            touch-action: manipulation;
         }
         
-        .breadcrumbs a:hover {
+        .breadcrumbs a:hover, .breadcrumbs a:focus {
             color: var(--secondary-color);
             text-decoration: underline;
             text-shadow: 0 0 8px var(--glow-color);
+            background-color: rgba(0, 149, 255, 0.1);
         }
         
         .breadcrumbs span {
             color: #4a7297;
-            margin: 0 10px;
-            font-size: 14px;
+            margin: 0 8px;
+            font-size: 10px;
             font-family: var(--heading-font);
         }
         
         .breadcrumbs .current {
             color: #87c3ff;
-            font-size: 14px;
+            font-size: 10px;
             font-family: var(--heading-font);
+            padding: 5px;
         }
         
+        /* Mobile optimizations */
         @media (max-width: 768px) {
-            .breadcrumbs {
-                padding: 15px 5%;
-            }
-            
-            .page-title {
-                font-size: 18px;
-            }
-            
-            .video-title {
+            body {
                 font-size: 16px;
             }
             
+            .container {
+                padding: 10px;
+                margin-top: 50px;
+            }
+            
+            .back-button {
+                top: 10px;
+                left: 10px;
+                padding: 10px 14px;
+                font-size: 9px;
+                gap: 6px;
+            }
+            
+            .page-title {
+                font-size: 14px;
+                margin: 15px 0 20px 0;
+            }
+            
+            .video-title {
+                font-size: 14px;
+                margin-bottom: 15px;
+            }
+            
+            .video-container {
+                margin-bottom: 20px;
+                border-radius: 6px;
+            }
+            
+            video {
+                min-height: 180px;
+            }
+            
+            .description-container {
+                padding: 15px;
+                margin-bottom: 20px;
+                border-radius: 6px;
+            }
+            
             .description-container h2 {
+                font-size: 12px;
+                padding-bottom: 10px;
+                margin-bottom: 12px;
+            }
+            
+            .description-content {
+                font-size: 15px;
+                line-height: 1.5;
+            }
+            
+            .description-content p {
+                margin-bottom: 12px;
+            }
+            
+            .breadcrumbs {
+                padding: 12px;
+                margin-top: 20px;
+            }
+            
+            .breadcrumbs a, .breadcrumbs .current {
+                font-size: 9px;
+                padding: 8px;
+            }
+            
+            .breadcrumbs span {
+                margin: 0 6px;
+                font-size: 9px;
+            }
+        }
+        
+        /* Extra small screens */
+        @media (max-width: 480px) {
+            body {
+                font-size: 15px;
+            }
+            
+            .container {
+                padding: 8px;
+            }
+            
+            .back-button {
+                padding: 8px 12px;
+                font-size: 8px;
+            }
+            
+            .page-title {
+                font-size: 12px;
+                padding: 0 10px;
+            }
+            
+            .video-title {
+                font-size: 12px;
+            }
+            
+            video {
+                min-height: 160px;
+            }
+            
+            .description-container {
+                padding: 12px;
+            }
+            
+            .description-container h2 {
+                font-size: 11px;
+            }
+            
+            .description-content {
                 font-size: 14px;
             }
             
-            .play-button {
-                font-size: 10px;
-                padding: 10px 20px;
+            .breadcrumbs-container {
+                gap: 2px;
+            }
+            
+            .breadcrumbs a, .breadcrumbs .current {
+                font-size: 8px;
+                padding: 6px;
+            }
+            
+            .breadcrumbs span {
+                margin: 0 4px;
+                font-size: 8px;
+            }
+        }
+        
+        /* Landscape orientation on mobile */
+        @media (max-width: 768px) and (orientation: landscape) {
+            .container {
+                margin-top: 40px;
+            }
+            
+            .page-title {
+                margin: 10px 0 15px 0;
+            }
+            
+            video {
+                min-height: 250px;
+            }
+        }
+        
+        /* Touch-friendly interactions */
+        @media (hover: none) and (pointer: coarse) {
+            .back-button:hover {
+                transform: none;
+            }
+            
+            .breadcrumbs a:hover {
+                background-color: rgba(0, 149, 255, 0.2);
             }
         }
     </style>
@@ -256,19 +375,16 @@
     
     <div class="ambient-background"></div>
     
-    <h1 class="page-title">Immersive Video Experience</h1>
+    <h1 class="page-title"></h1>
     
     <div class="container">
         <h2 class="video-title">Traffic Chaos</h2>
         
         <div class="video-container">
-            <video id="myVideo" controls muted>
+            <video id="myVideo" controls preload="metadata">
                 <source src="Traffic Chaos.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
-            <div class="controls-overlay">
-                <button class="play-button" onclick="unmuteAndPlay()">Play Video</button>
-            </div>
         </div>
         
         <div class="description-container">
@@ -295,29 +411,35 @@
     </div>
 
     <script>
-        function unmuteAndPlay() {
-            const video = document.getElementById('myVideo');
-            video.muted = false; // Unmute the video
-            video.play(); // Start playback
-            
-            // Add a subtle animation effect when playing
-            document.querySelector('.video-container').style.boxShadow = '0 0 35px rgba(0, 149, 255, 0.8)';
-            setTimeout(() => {
-                document.querySelector('.video-container').style.boxShadow = '0 0 25px rgba(0, 149, 255, 0.5)';
-            }, 1000);
-        }
-        
-        // Initialize video with hover effects
+        // Initialize video with mobile-friendly features
         document.addEventListener('DOMContentLoaded', function() {
             const video = document.getElementById('myVideo');
             
             // Add pause/play functionality when clicking on video
             video.addEventListener('click', function() {
                 if (video.paused) {
-                    video.play();
+                    video.play().catch(e => console.log('Playback failed:', e));
                 } else {
                     video.pause();
                 }
+            });
+            
+            // Handle video loading states
+            video.addEventListener('loadstart', function() {
+                console.log('Video loading started');
+            });
+            
+            video.addEventListener('canplaythrough', function() {
+                console.log('Video can play through');
+            });
+            
+            // Add subtle glow effect when video is playing
+            video.addEventListener('play', function() {
+                document.querySelector('.video-container').style.boxShadow = '0 0 35px rgba(0, 149, 255, 0.8)';
+            });
+            
+            video.addEventListener('pause', function() {
+                document.querySelector('.video-container').style.boxShadow = '0 0 25px rgba(0, 149, 255, 0.5)';
             });
         });
     </script>
