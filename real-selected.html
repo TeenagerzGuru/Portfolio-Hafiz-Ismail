@@ -34,6 +34,8 @@
             overflow-x: hidden;
             position: relative;
             line-height: 1.6;
+            min-height: 100vh;
+            -webkit-overflow-scrolling: touch;
         }
 
         h1, h2, h3, .back-button {
@@ -45,56 +47,62 @@
 
         .back-button {
             position: fixed;
-            top: 20px;
-            left: 20px;
+            top: 15px;
+            left: 15px;
             background: linear-gradient(135deg, #0055aa, #003366);
             color: var(--secondary-color);
-            padding: 12px 20px;
-            border-radius: 0;
+            padding: 12px 16px;
+            border-radius: 8px;
             text-decoration: none;
             font-weight: 600;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 8px;
             box-shadow: 0 0 15px var(--glow-color);
             transition: all 0.3s ease;
             z-index: 100;
-            font-size: 0.7rem;
+            font-size: 0.6rem;
             border: 1px solid var(--secondary-color);
+            min-height: 44px;
+            min-width: 80px;
         }
         
-        .back-button:hover {
-            transform: translateY(-3px);
+        .back-button:hover,
+        .back-button:active {
+            transform: translateY(-2px);
             box-shadow: 0 0 20px var(--accent-color);
             text-shadow: 0 0 5px var(--accent-color);
-        }
-
-        .back-button:active {
-            transform: translateY(2px);
-            box-shadow: 0 0 10px var(--glow-color);
+            background: linear-gradient(135deg, #0066cc, #004080);
         }
 
         .title {
             position: fixed;
-            top: 20px;
+            top: 15px;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 1.5rem;
+            font-size: clamp(0.7rem, 3vw, 1.2rem);
             z-index: 100;
             text-shadow: 0 0 10px var(--glow-color);
             color: var(--secondary-color);
+            white-space: nowrap;
+            padding: 0 10px;
         }
 
-        /* Breadcrumbs */
         .breadcrumbs {
             position: fixed;
-            bottom: 20px;
+            bottom: 15px;
             left: 50%; 
             transform: translateX(-50%);
             display: flex;
-            gap: 10px;
-            font-size: 1rem;
+            gap: 5px;
+            font-size: 0.9rem;
             z-index: 100;
+            padding: 8px 16px;
+            background: rgba(7, 27, 51, 0.8);
+            border-radius: 20px;
+            border: 1px solid var(--accent-color);
+            backdrop-filter: blur(10px);
         }
 
         .breadcrumbs a {
@@ -103,16 +111,29 @@
             transition: all 0.3s ease;
             font-family: var(--body-font);
             text-shadow: 0 0 5px var(--glow-color);
+            padding: 4px 8px;
+            border-radius: 4px;
+            min-height: 32px;
+            display: flex;
+            align-items: center;
         }
 
-        .breadcrumbs a:hover {
+        .breadcrumbs a:hover,
+        .breadcrumbs a:active {
             color: var(--secondary-color);
             text-shadow: 0 0 8px var(--glow-color);
+            background: rgba(0, 149, 255, 0.1);
         }
 
         .breadcrumbs span {
             color: rgba(225, 240, 255, 0.7);
             font-family: var(--body-font);
+            display: flex;
+            align-items: center;
+        }
+
+        .breadcrumbs .current {
+            color: #87c3ff;
         }
 
         .slider-container {
@@ -120,6 +141,7 @@
             height: 100vh;
             width: 100%;
             overflow: hidden;
+            touch-action: pan-y;
         }
 
         .slide {
@@ -128,11 +150,13 @@
             height: 100vh;
             display: flex;
             align-items: center;
-            justify-content: space-around;
-            padding: 100px 5% 20px;
+            justify-content: center;
+            padding: 80px 20px 100px;
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.5s ease;
+            flex-direction: column;
+            gap: 20px;
         }
 
         .slide.active {
@@ -141,97 +165,131 @@
         }
 
         .mac-container {
-            flex: 1;
-            max-width: 50%;
-            border-radius: 10px;
+            width: 100%;
+            max-width: 500px;
+            border-radius: 15px;
             overflow: hidden;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             border: 2px solid var(--accent-color);
             box-shadow: 0 0 20px var(--glow-color);
+            margin-bottom: 20px;
         }
 
-        .mac-container:hover {
+        .mac-container:hover,
+        .mac-container:active {
             transform: scale(1.02);
             box-shadow: 0 0 30px var(--accent-color);
         }
 
+        .mac-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
         .content {
-            flex: 1;
-            max-width: 40%;
-            padding: 20px;
-            background-color: rgba(7, 27, 51, 0.6);
+            width: 100%;
+            max-width: 500px;
+            padding: 25px;
+            background: rgba(7, 27, 51, 0.8);
             border: 1px solid var(--accent-color);
-            border-radius: 8px;
+            border-radius: 15px;
             box-shadow: 0 0 15px rgba(0, 100, 255, 0.2);
+            backdrop-filter: blur(10px);
+            text-align: center;
         }
 
         .content h2 {
-            font-size: 1.5rem;
+            font-size: clamp(1rem, 4vw, 1.3rem);
             margin-bottom: 20px;
             text-shadow: 0 0 10px var(--glow-color);
             color: var(--secondary-color);
+            line-height: 1.3;
         }
 
         .content p {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             line-height: 1.6;
-            font-size: 1.4rem;
+            font-size: clamp(1rem, 3vw, 1.2rem);
+        }
+
+        .content p:last-child {
+            margin-bottom: 0;
         }
 
         /* Pagination */
         .pagination {
             position: fixed;
-            bottom: 50px;
-            right: 50px;
+            bottom: 70px;
+            right: 20px;
             display: flex;
-            gap: 10px;
+            gap: 12px;
             z-index: 100;
         }
 
         .dot {
             width: 16px;
             height: 16px;
-            border-radius: 0;
+            border-radius: 50%;
             background-color: rgba(75, 159, 255, 0.3);
             cursor: pointer;
             transition: all 0.3s ease;
             border: 1px solid var(--accent-color);
             box-shadow: 0 0 5px var(--glow-color);
+            min-height: 44px;
+            min-width: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .dot.active {
+        .dot::before {
+            content: '';
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: rgba(75, 159, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .dot.active::before {
             background-color: var(--accent-color);
             box-shadow: 0 0 10px var(--accent-color);
         }
 
         /* Navigation Arrows */
         .arrow {
-            position: absolute;
+            position: fixed;
             top: 50%;
             transform: translateY(-50%);
-            font-size: 2rem;
+            font-size: 1.5rem;
             color: var(--secondary-color);
             cursor: pointer;
             z-index: 100;
             padding: 15px;
-            opacity: 0.7;
+            opacity: 0.8;
             transition: all 0.3s ease;
             font-family: var(--header-font);
-            background: linear-gradient(135deg, #0055aa, #003366);
+            background: linear-gradient(135deg, rgba(0, 85, 170, 0.8), rgba(0, 51, 102, 0.8));
             border: 1px solid var(--secondary-color);
+            border-radius: 50%;
             box-shadow: 0 0 15px var(--glow-color);
             text-shadow: 0 0 5px var(--glow-color);
+            backdrop-filter: blur(10px);
+            min-height: 60px;
+            min-width: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .arrow:hover {
+        .arrow:hover,
+        .arrow:active {
             opacity: 1;
             box-shadow: 0 0 25px var(--accent-color);
             text-shadow: 0 0 10px var(--accent-color);
-        }
-
-        .arrow:active {
-            transform: translateY(-50%) scale(0.95);
-            box-shadow: 0 0 10px var(--glow-color);
+            transform: translateY(-50%) scale(1.05);
         }
 
         .prev {
@@ -242,132 +300,276 @@
             right: 20px;
         }
 
-        .breadcrumbs-container {
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-        
-        .breadcrumbs a {
-            color: var(--accent-color);
-            text-decoration: none;
-            font-size: 1rem;
-            transition: color 0.3s ease;
-        }
-        
-        .breadcrumbs a:hover {
-            color: var(--secondary-color);
-            text-decoration: underline;
-        }
-        
-        .breadcrumbs span {
-            color: #4a7297;
-            margin: 0 10px;
-            font-size: 1rem;
-        }
-        
-        .breadcrumbs .current {
-            color: #87c3ff;
-            font-size: 1rem;
-        }
+        /* Desktop styles */
+        @media (min-width: 768px) {
+            .slide {
+                flex-direction: row;
+                padding: 100px 40px 120px;
+                gap: 40px;
+            }
 
-        @media (max-width: 768px) {
-            .title {
-                font-size: 1rem;
-                width: 100%;
-                text-align: center;
+            .mac-container {
+                max-width: 50%;
+                margin-bottom: 0;
+            }
+
+            .content {
+                max-width: 45%;
+                text-align: left;
+                padding: 30px;
             }
 
             .back-button {
-                font-size: 0.6rem;
-                padding: 8px 12px;
+                top: 20px;
+                left: 20px;
+                padding: 12px 20px;
+                font-size: 0.7rem;
+            }
+
+            .title {
+                top: 20px;
+                font-size: 1.5rem;
+            }
+
+            .breadcrumbs {
+                bottom: 20px;
+                font-size: 1rem;
+                padding: 10px 20px;
+            }
+
+            .pagination {
+                bottom: 50px;
+                right: 50px;
+            }
+
+            .dot {
+                min-height: auto;
+                min-width: auto;
+                width: 16px;
+                height: 16px;
+            }
+
+            .dot::before {
+                width: 16px;
+                height: 16px;
+            }
+
+            .arrow {
+                font-size: 2rem;
+                padding: 20px;
+                min-height: 80px;
+                min-width: 80px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .slide {
+                padding: 120px 60px 140px;
+                gap: 60px;
+            }
+
+            .content {
+                padding: 40px;
+            }
+        }
+
+        /* Small mobile devices */
+        @media (max-width: 480px) {
+            .slide {
+                padding: 70px 15px 90px;
+                gap: 15px;
+            }
+
+            .back-button {
+                top: 10px;
+                left: 10px;
+                padding: 10px 12px;
+                font-size: 0.5rem;
+                min-width: 70px;
+            }
+
+            .title {
+                top: 10px;
+                font-size: clamp(0.6rem, 3vw, 0.9rem);
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .breadcrumbs {
+                bottom: 10px;
+                font-size: 0.8rem;
+                padding: 6px 12px;
+                gap: 3px;
+            }
+
+            .pagination {
+                bottom: 60px;
+                right: 15px;
+                gap: 8px;
+            }
+
+            .arrow {
+                font-size: 1.2rem;
+                padding: 12px;
+                min-height: 50px;
+                min-width: 50px;
+            }
+
+            .prev {
+                left: 15px;
+            }
+
+            .next {
+                right: 15px;
+            }
+        }
+
+        /* Landscape mobile orientation */
+        @media (max-height: 600px) and (orientation: landscape) {
+            .slide {
+                flex-direction: row;
+                padding: 60px 20px 80px;
+                gap: 20px;
+            }
+
+            .mac-container {
+                max-width: 45%;
+            }
+
+            .content {
+                max-width: 50%;
+                text-align: left;
+            }
+
+            .title {
+                top: 10px;
+            }
+
+            .back-button {
                 top: 10px;
                 left: 10px;
             }
 
             .breadcrumbs {
-                padding: 15px 5%;
-                font-size: 0.8rem;
-            }
-            
-            .breadcrumbs a, 
-            .breadcrumbs span, 
-            .breadcrumbs .current {
-                font-size: 0.8rem;
-            }
-
-            .slide {
-                flex-direction: column;
-                padding-top: 70px;
-            }
-
-            .mac-container, .content {
-                max-width: 90%;
-            }
-
-            .content {
-                text-align: center;
-            }
-            
-            .content h2 {
-                font-size: 1.2rem;
-            }
-            
-            .content p {
-                font-size: 1.2rem;
+                bottom: 10px;
             }
 
             .pagination {
-                right: 50%;
-                transform: translateX(50%);
-                bottom: 20px;
+                bottom: 40px;
             }
+        }
 
-            .arrow {
-                font-size: 1.2rem;
-                padding: 10px;
+        /* Touch-friendly improvements */
+        @media (pointer: coarse) {
+            .mac-container {
+                cursor: pointer;
             }
+            
+            .arrow {
+                opacity: 0.9;
+            }
+            
+            .dot {
+                width: 20px;
+                height: 20px;
+            }
+            
+            .dot::before {
+                width: 20px;
+                height: 20px;
+            }
+        }
+
+        /* High DPI displays */
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            .back-button,
+            .arrow,
+            .dot {
+                border-width: 0.5px;
+            }
+        }
+
+        /* Accessibility improvements */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Focus styles for keyboard navigation */
+        .back-button:focus,
+        .breadcrumbs a:focus,
+        .arrow:focus,
+        .dot:focus,
+        .mac-container:focus {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 2px;
+        }
+
+        /* Swipe indicator for mobile */
+        @media (max-width: 767px) {
+            .swipe-hint {
+                position: fixed;
+                bottom: 120px;
+                left: 50%;
+                transform: translateX(-50%);
+                font-size: 0.8rem;
+                color: rgba(225, 240, 255, 0.5);
+                text-align: center;
+                z-index: 100;
+                font-family: var(--body-font);
+                animation: fadeInOut 3s ease-in-out infinite;
+            }
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.8; }
         }
     </style>
 </head>
 <body>
     <!-- Home Button -->
     <a href="index.html" class="back-button">
-        ← BACK TO MAIN
+        ← BACK
     </a>
 
     <h1 class="title">SELECTED PROJECT</h1>
     
     <!-- Navigation Arrows -->
-    <div class="arrow prev">❮</div>
-    <div class="arrow next">❯</div>
+    <div class="arrow prev" tabindex="0" role="button" aria-label="Previous project">❮</div>
+    <div class="arrow next" tabindex="0" role="button" aria-label="Next project">❯</div>
 
     <!-- Slider container -->
     <div class="slider-container">
         <!-- Khawarizmi Library Slide -->
         <div class="slide active">
-            <a href="Khawarizmi Library.html" class="mac-container">
-                <img src="Preview_Library_bg.png" alt="Khawarizmi Library" style="width: 100%">
+            <a href="Khawarizmi Library.html" class="mac-container" tabindex="0">
+                <img src="Preview_Library_bg.png" alt="Khawarizmi Library Preview" loading="lazy">
             </a>
             <div class="content">
                 <h2>KHAWARIZMI LIBRARY</h2>
-                <p>The description:</p>
+                <p><strong>The description:</strong></p>
                 <p>Khawarizmi Library System is a modern and user-friendly library management solution designed to efficiently organize, track, and manage books and users at UNITAR.</p>
                 <p>The system allows librarians to easily catalog books, manage borrow and return transactions, and monitor overdue items.</p>
-                <p>sers can browse the digital catalog, search for books by title, author, or genre, and check availability in real-time.</p>
+                <p>Users can browse the digital catalog, search for books by title, author, or genre, and check availability in real-time.</p>
             </div>
         </div>
 
         <!-- Traffic Chaos Slide -->
         <div class="slide">
-            <a href="Traffic Chaos.html" class="mac-container">
-                <img src="Preview_TC_bg.png" alt="Traffic Chaos" style="width: 100%">
+            <a href="Traffic Chaos.html" class="mac-container" tabindex="0">
+                <img src="Preview_TC_bg.png" alt="Traffic Chaos Game Preview" loading="lazy">
             </a>
             <div class="content">
                 <h2>TRAFFIC CHAOS</h2>
-                <p>The description:</p>
+                <p><strong>The description:</strong></p>
                 <p>Traffic Chaos is an endless highway game to avoid traffic.</p>
-                <p>Player will face three type of terrain which is: Desert, Antartica and Summer.</p>
+                <p>Player will face three type of terrain which is: Desert, Antarctica and Summer.</p>
                 <p>To control by using W - forward, S - slow down, A - left turn, D - right turn. Space - Handbrake</p>
                 <p>Automatically update the highscore</p>
                 <p>Be alert and avoid the traffic!</p>
@@ -385,9 +587,12 @@
 
     <!-- Pagination dots -->
     <div class="pagination">
-        <div class="dot active" data-index="0"></div>
-        <div class="dot" data-index="1"></div>
+        <div class="dot active" data-index="0" tabindex="0" role="button" aria-label="Go to project 1"></div>
+        <div class="dot" data-index="1" tabindex="0" role="button" aria-label="Go to project 2"></div>
     </div>
+
+    <!-- Swipe hint for mobile -->
+    <div class="swipe-hint">← Swipe or use arrows to navigate →</div>
 
     <script>
         // Get DOM elements
@@ -395,12 +600,20 @@
         const dots = document.querySelectorAll('.dot');
         const prevBtn = document.querySelector('.prev');
         const nextBtn = document.querySelector('.next');
+        const sliderContainer = document.querySelector('.slider-container');
         
         let currentIndex = 0;
         const totalSlides = slides.length;
+        let touchStartX = 0;
+        let touchEndX = 0;
+        let isTransitioning = false;
 
         // Function to show a specific slide
         function showSlide(index) {
+            if (isTransitioning) return;
+            
+            isTransitioning = true;
+            
             // Hide all slides
             slides.forEach(slide => {
                 slide.classList.remove('active');
@@ -416,6 +629,11 @@
             dots[index].classList.add('active');
             
             currentIndex = index;
+            
+            // Reset transition lock after animation completes
+            setTimeout(() => {
+                isTransitioning = false;
+            }, 500);
         }
 
         // Event listeners for dots
@@ -423,6 +641,15 @@
             dot.addEventListener('click', function() {
                 const index = parseInt(this.getAttribute('data-index'));
                 showSlide(index);
+            });
+            
+            // Keyboard support for dots
+            dot.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    const index = parseInt(this.getAttribute('data-index'));
+                    showSlide(index);
+                }
             });
         });
 
@@ -439,19 +666,91 @@
             showSlide(newIndex);
         });
 
+        // Keyboard support for arrows
+        [prevBtn, nextBtn].forEach(btn => {
+            btn.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.click();
+                }
+            });
+        });
+
+        // Touch/swipe support
+        sliderContainer.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        sliderContainer.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, { passive: true });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const swipeDistance = touchEndX - touchStartX;
+            
+            if (Math.abs(swipeDistance) < swipeThreshold) return;
+            
+            if (swipeDistance > 0) {
+                // Swipe right - show previous
+                prevBtn.click();
+            } else {
+                // Swipe left - show next
+                nextBtn.click();
+            }
+        }
+
+        // Mouse drag support for desktop
+        let isDragging = false;
+        let dragStartX = 0;
+
+        sliderContainer.addEventListener('mousedown', function(e) {
+            isDragging = true;
+            dragStartX = e.clientX;
+            sliderContainer.style.cursor = 'grabbing';
+        });
+
+        document.addEventListener('mousemove', function(e) {
+            if (!isDragging) return;
+            e.preventDefault();
+        });
+
+        document.addEventListener('mouseup', function(e) {
+            if (!isDragging) return;
+            
+            const dragDistance = e.clientX - dragStartX;
+            const dragThreshold = 50;
+            
+            if (Math.abs(dragDistance) >= dragThreshold) {
+                if (dragDistance > 0) {
+                    prevBtn.click();
+                } else {
+                    nextBtn.click();
+                }
+            }
+            
+            isDragging = false;
+            sliderContainer.style.cursor = 'default';
+        });
+
         // Initialize with the first slide
         showSlide(0);
         
-        // Optional: Add keyboard navigation
+        // Keyboard navigation
         document.addEventListener('keydown', function(e) {
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+            
             if (e.key === 'ArrowLeft') {
+                e.preventDefault();
                 prevBtn.click();
             } else if (e.key === 'ArrowRight') {
+                e.preventDefault();
                 nextBtn.click();
             }
         });
         
-        // Add simple click sound effect
+        // Add click sound effect
         function addClickSound() {
             const clickSound = new Audio('data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAB8AB0A');
             
@@ -469,6 +768,29 @@
         } catch (e) {
             console.log('Sound not supported in this browser');
         }
+
+        // Auto-hide swipe hint after first interaction
+        let hasInteracted = false;
+        const swipeHint = document.querySelector('.swipe-hint');
+
+        function hideSwipeHint() {
+            if (!hasInteracted && swipeHint) {
+                hasInteracted = true;
+                swipeHint.style.display = 'none';
+            }
+        }
+
+        // Hide hint on any interaction
+        [prevBtn, nextBtn, ...dots].forEach(element => {
+            element.addEventListener('click', hideSwipeHint);
+        });
+
+        sliderContainer.addEventListener('touchstart', hideSwipeHint);
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+                hideSwipeHint();
+            }
+        });
     </script>
 </body>
 </html>
