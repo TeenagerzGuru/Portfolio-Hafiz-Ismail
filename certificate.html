@@ -9,6 +9,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
 
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Press Start 2P', monospace;
             background-color: #121212;
@@ -16,6 +20,7 @@
             margin: 0;
             padding: 0;
             font-size: 18px;
+            line-height: 1.6;
         }
 
         .header {
@@ -27,12 +32,12 @@
 
         .back-button {
             position: fixed;
-            top: 20px;
-            left: 20px;
+            top: 15px;
+            left: 15px;
             background: linear-gradient(135deg, #4b6cb7, #182848);
             color: white;
-            padding: 10px 20px;
-            border-radius: 0px;
+            padding: 12px 18px;
+            border-radius: 8px;
             text-decoration: none;
             font-weight: 600;
             display: flex;
@@ -40,36 +45,46 @@
             gap: 8px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
             transition: all 0.3s ease;
-            z-index: 100;
-            font-family: 'Press Start 2P', cursive; font-size: 10px;
+            z-index: 1000;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 10px;
+            min-height: 44px;
+            min-width: 44px;
+            justify-content: center;
         }
 
         .back-button:hover {
-            transform: translateY(-3px);
+            transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(79, 174, 255, 0.3);
         }
 
+        .back-button:active {
+            transform: translateY(0);
+        }
+
         .section {
-            padding: 30px;
+            padding: 80px 20px 30px;
             max-width: 1200px;
             margin: 0 auto;
         }
 
         h2 {
-           text-align: center;
-            font-size: 2rem;
+            text-align: center;
+            font-size: 1.8rem;
             margin-bottom: 40px;
             color: #ffffff;
             text-shadow: 0 0 10px rgba(79, 174, 255, 0.3);
             position: relative;
-            font-family: var(--header-font);
+            font-family: 'Press Start 2P', cursive;
+            line-height: 1.4;
+            padding: 0 10px;
         }
 
         h2:after {
             content: '';
             display: block;
-            width: 80px;
-            height: 4px;
+            width: 60px;
+            height: 3px;
             background-color: #3a80e9;
             position: absolute;
             bottom: -15px;
@@ -79,30 +94,33 @@
 
         h3 {
             font-family: 'Press Start 2P', cursive;
-            font-size: 16px;
+            font-size: 14px;
             margin-bottom: 15px;
-            line-height: 1.4;
+            line-height: 1.5;
             color: #3a80e9;
+            word-wrap: break-word;
         }
 
         .certificate-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
         }
 
         .certificate-card {
             background-color: #1e1e1e;
-            border-radius: 8px;
+            border-radius: 12px;
             overflow: hidden;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             display: flex;
             flex-direction: column;
             height: 100%;
+            border: 1px solid #333;
         }
 
         .certificate-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(58, 128, 233, 0.15);
         }
 
         .certificate-image {
@@ -112,38 +130,49 @@
             justify-content: center;
             align-items: center;
             height: 180px;
+            min-height: 150px;
         }
 
         .certificate-image img {
-            max-height: 150px;
+            max-height: 140px;
             max-width: 100%;
             object-fit: contain;
+            border-radius: 4px;
         }
 
         .certificate-details {
             padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .certificate-details p {
             color: #bbb;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
             font-family: 'VT323', monospace;
-            font-size: 20px;
+            font-size: 18px;
+            line-height: 1.4;
         }
 
         .verify-button {
             display: inline-block;
             background: linear-gradient(135deg, #3a80e9, #1e40af);
             color: white;
-            padding: 8px 15px;
-            border-radius: 4px;
+            padding: 12px 18px;
+            border-radius: 8px;
             text-decoration: none;
-            margin-top: 15px;
-            font-size: 12px;
+            margin-top: auto;
+            font-size: 11px;
             transition: all 0.3s ease;
             text-align: center;
             font-family: 'Press Start 2P', cursive;
             letter-spacing: 0.5px;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1.2;
         }
 
         .verify-button:hover {
@@ -151,8 +180,12 @@
             transform: translateY(-2px);
         }
 
+        .verify-button:active {
+            transform: translateY(0);
+        }
+
         .navigation {
-            padding: 10px 20px;
+            padding: 15px 20px;
             background-color: #1a1a1a;
             text-align: center;
         }
@@ -160,7 +193,11 @@
         .navigation a {
             color: #bbb;
             text-decoration: none;
-            margin: 0 10px;
+            margin: 0 15px;
+            padding: 10px;
+            display: inline-block;
+            min-height: 44px;
+            line-height: 24px;
         }
 
         .navigation a:hover {
@@ -168,7 +205,7 @@
         }
 
         .breadcrumbs {
-            padding: 15px 15%;
+            padding: 20px;
             background-color: #1a1a1a;
             border-top: 1px solid #333;
             margin-top: 30px;
@@ -178,13 +215,19 @@
             display: flex;
             align-items: center;
             flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .breadcrumbs a {
             color: #4b6cb7;
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 14px;
             transition: color 0.3s ease;
+            padding: 8px;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
         }
 
         .breadcrumbs a:hover {
@@ -194,24 +237,199 @@
 
         .breadcrumbs span {
             color: #777;
-            margin: 0 10px;
-            font-size: 0.9rem;
+            margin: 0 5px;
+            font-size: 14px;
         }
 
         .breadcrumbs .current {
             color: #b0b0b0;
-            font-size: 0.9rem;
+            font-size: 14px;
+            padding: 8px;
         }
 
+        /* Mobile Styles */
         @media (max-width: 768px) {
+            body {
+                font-size: 16px;
+            }
+
+            .section {
+                padding: 70px 15px 20px;
+            }
+
+            h2 {
+                font-size: 1.4rem;
+                margin-bottom: 30px;
+                padding: 0 5px;
+            }
+
+            h2:after {
+                width: 50px;
+                height: 2px;
+            }
+
+            h3 {
+                font-size: 12px;
+                line-height: 1.6;
+            }
+
+            .certificate-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .certificate-card {
+                border-radius: 8px;
+            }
+
+            .certificate-image {
+                height: 160px;
+                padding: 15px;
+            }
+
+            .certificate-image img {
+                max-height: 120px;
+            }
+
+            .certificate-details {
+                padding: 15px;
+            }
+
+            .certificate-details p {
+                font-size: 16px;
+                margin-bottom: 6px;
+            }
+
+            .verify-button {
+                font-size: 10px;
+                padding: 14px 16px;
+                margin-top: 15px;
+            }
+
+            .back-button {
+                top: 10px;
+                left: 10px;
+                padding: 10px 14px;
+                font-size: 9px;
+            }
+
             .breadcrumbs {
-                padding: 15px 5%;
+                padding: 15px;
+            }
+
+            .breadcrumbs a,
+            .breadcrumbs .current {
+                font-size: 12px;
+            }
+
+            .navigation a {
+                margin: 0 10px;
+                font-size: 14px;
+            }
+        }
+
+        /* Small Mobile Styles */
+        @media (max-width: 480px) {
+            body {
+                font-size: 14px;
+            }
+
+            .section {
+                padding: 60px 10px 15px;
+            }
+
+            h2 {
+                font-size: 1.2rem;
+                margin-bottom: 25px;
+            }
+
+            h3 {
+                font-size: 11px;
+            }
+
+            .certificate-grid {
+                gap: 15px;
+            }
+
+            .certificate-image {
+                height: 140px;
+                padding: 10px;
+            }
+
+            .certificate-image img {
+                max-height: 100px;
+            }
+
+            .certificate-details {
+                padding: 12px;
+            }
+
+            .certificate-details p {
+                font-size: 14px;
+            }
+
+            .verify-button {
+                font-size: 9px;
+                padding: 12px 14px;
+            }
+
+            .back-button {
+                padding: 8px 12px;
+                font-size: 8px;
+            }
+
+            .breadcrumbs a,
+            .breadcrumbs .current {
+                font-size: 11px;
+                padding: 6px;
+            }
+        }
+
+        /* Touch-friendly hover effects for mobile */
+        @media (hover: none) and (pointer: coarse) {
+            .certificate-card:hover {
+                transform: none;
+                box-shadow: none;
+            }
+
+            .verify-button:hover {
+                transform: none;
+                background: linear-gradient(135deg, #3a80e9, #1e40af);
+            }
+
+            .back-button:hover {
+                transform: none;
+            }
+        }
+
+        /* Landscape mobile orientation */
+        @media (max-width: 896px) and (orientation: landscape) and (max-height: 414px) {
+            .section {
+                padding-top: 60px;
+            }
+
+            h2 {
+                font-size: 1.3rem;
+                margin-bottom: 20px;
+            }
+
+            .certificate-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 15px;
+            }
+
+            .certificate-image {
+                height: 120px;
+            }
+
+            .certificate-details {
+                padding: 12px;
             }
         }
     </style>
 </head>
 <body>
-    <a href="index.html" class="back-button">← Back to Main</a>
+    <a href="index.html" class="back-button">← Back</a>
 
     <section class="section">
         <h2>My Certificates</h2>
@@ -262,8 +480,6 @@
                     <p>Issued: March 2024</p>
                 </div>
             </div>
-
-            
 
             <div class="certificate-card">
                 <div class="certificate-image">
