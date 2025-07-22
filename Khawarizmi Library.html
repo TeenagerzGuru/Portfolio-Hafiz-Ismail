@@ -35,6 +35,7 @@
             color: var(--text);
             font-family: 'VT323', monospace;
             font-size: 1.2rem;
+            line-height: 1.5;
         }
 
         h1, h2, h3, .back-button, .nav-btn {
@@ -43,11 +44,11 @@
 
         .back-button {
             position: fixed;
-            top: 20px;
-            left: 20px;
+            top: 15px;
+            left: 15px;
             background: linear-gradient(135deg, var(--secondary), var(--accent));
             color: white;
-            padding: 10px 20px;
+            padding: 12px 18px;
             border-radius: 5px;
             text-decoration: none;
             font-weight: 600;
@@ -59,9 +60,10 @@
             transition: all 0.3s ease;
             z-index: 100;
             border: 2px solid var(--light);
+            touch-action: manipulation;
         }
         
-        .back-button:hover {
+        .back-button:hover, .back-button:focus {
             transform: translateY(-3px);
             box-shadow: 0 6px 20px rgba(0, 119, 255, 0.5);
             background: linear-gradient(135deg, var(--accent), var(--secondary));
@@ -70,10 +72,10 @@
         .slider-container {
             width: 100%;
             max-width: 1200px;
-            height: 70vh;
+            height: 60vh;
             position: relative;
             overflow: hidden;
-            margin-top: 4rem;
+            margin: 80px 15px 0 15px;
             border: 3px solid var(--accent);
             border-radius: 10px;
             box-shadow: 0 0 30px rgba(0, 119, 255, 0.3);
@@ -83,6 +85,7 @@
             display: flex;
             transition: transform 0.5s ease-in-out;
             height: 100%;
+            touch-action: pan-y;
         }
 
         .slide {
@@ -91,7 +94,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 1rem;
+            padding: 15px;
             background-color: rgba(0, 0, 0, 0.7);
         }
 
@@ -123,37 +126,44 @@
             z-index: 100;
             font-size: 1rem;
             border: 2px solid var(--accent);
+            touch-action: manipulation;
+            user-select: none;
         }
 
-        .nav-btn:hover {
+        .nav-btn:hover, .nav-btn:focus {
             background: var(--accent);
             transform: translateY(-50%) scale(1.1);
             box-shadow: 0 0 15px var(--accent);
         }
 
+        .nav-btn:active {
+            transform: translateY(-50%) scale(0.95);
+        }
+
         .prev-btn {
-            left: 2rem;
+            left: 10px;
         }
 
         .next-btn {
-            right: 2rem;
+            right: 10px;
         }
 
         .caption {
             text-align: center;
-            margin-top: 1.5rem;
-            font-size: 1.8rem;
+            margin: 20px 15px;
+            font-size: 1.4rem;
             color: var(--light);
             font-family: 'Press Start 2P', cursive;
             text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
             padding: 0.5rem;
             letter-spacing: 1px;
+            line-height: 1.4;
         }
         
         .project-description {
             max-width: 800px;
-            margin: 4rem auto;
-            padding: 2rem;
+            margin: 30px 15px;
+            padding: 20px;
             opacity: 0;
             transform: translateY(20px);
             transition: all 0.5s ease;
@@ -169,17 +179,18 @@
         }
 
         .description-title {
-            font-size: 1.8rem;
+            font-size: 1.4rem;
             color: var(--light);
             margin-bottom: 1.5rem;
             font-weight: 700;
             text-align: center;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
             letter-spacing: 1px;
+            line-height: 1.4;
         }
 
         .description-text {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             line-height: 1.6;
             color: var(--text);
             text-align: justify;
@@ -187,8 +198,32 @@
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
         }
 
+        /* Slide indicators */
+        .slide-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(116, 185, 255, 0.3);
+            border: 2px solid var(--accent);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            touch-action: manipulation;
+        }
+
+        .indicator.active {
+            background-color: var(--light);
+            box-shadow: 0 0 10px var(--accent);
+        }
+
         .breadcrumbs {
-            padding: 15px 15%;
+            padding: 15px;
             background-color: var(--dark);
             border-top: 1px solid var(--accent);
             margin-top: 30px;
@@ -199,57 +234,217 @@
             display: flex;
             align-items: center;
             flex-wrap: wrap;
+            justify-content: center;
         }
         
         .breadcrumbs a {
             color: var(--light);
             text-decoration: none;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             transition: color 0.3s ease;
             font-family: 'VT323', monospace;
+            padding: 5px 8px;
+            border-radius: 3px;
+            touch-action: manipulation;
         }
         
-        .breadcrumbs a:hover {
+        .breadcrumbs a:hover, .breadcrumbs a:focus {
             color: var(--highlight);
             text-decoration: underline;
+            background-color: rgba(0, 119, 255, 0.1);
         }
         
         .breadcrumbs span {
             color: var(--accent);
-            margin: 0 10px;
-            font-size: 1.2rem;
+            margin: 0 8px;
+            font-size: 1.1rem;
         }
         
         .breadcrumbs .current {
             color: var(--light);
-            font-size: 1.2rem;
+            font-size: 1.1rem;
+            padding: 5px 8px;
+        }
+
+        /* Touch swipe gestures */
+        .slider-container.swiping {
+            cursor: grabbing;
         }
         
+        /* Mobile Styles */
         @media (max-width: 768px) {
-            .breadcrumbs {
-                padding: 15px 5%;
+            body {
+                font-size: 1.1rem;
             }
-            
-            .description-title {
-                font-size: 1.4rem;
+
+            .back-button {
+                top: 10px;
+                left: 10px;
+                font-size: 0.6rem;
+                padding: 10px 14px;
+                gap: 6px;
             }
-            
-            .caption {
-                font-size: 1.2rem;
+
+            .slider-container {
+                height: 50vh;
+                margin: 60px 10px 0 10px;
+                border-radius: 8px;
             }
-            
-            .description-text {
-                font-size: 1.3rem;
+
+            .slide {
+                padding: 10px;
             }
-            
+
             .nav-btn {
                 width: 40px;
                 height: 40px;
+                font-size: 0.9rem;
+                padding: 0.8rem;
             }
-            
+
+            .prev-btn {
+                left: 8px;
+            }
+
+            .next-btn {
+                right: 8px;
+            }
+
+            .caption {
+                font-size: 1.1rem;
+                margin: 15px 10px;
+                letter-spacing: 0.5px;
+            }
+
+            .project-description {
+                margin: 20px 10px;
+                padding: 15px;
+            }
+
+            .description-title {
+                font-size: 1.1rem;
+                margin-bottom: 1rem;
+            }
+
+            .description-text {
+                font-size: 1.1rem;
+                margin-bottom: 1.5rem;
+                text-align: left;
+            }
+
+            .indicator {
+                width: 10px;
+                height: 10px;
+            }
+
+            .breadcrumbs {
+                padding: 12px;
+            }
+
+            .breadcrumbs a, .breadcrumbs .current {
+                font-size: 1rem;
+                padding: 6px;
+            }
+
+            .breadcrumbs span {
+                margin: 0 6px;
+                font-size: 1rem;
+            }
+        }
+
+        /* Small mobile devices */
+        @media (max-width: 480px) {
+            body {
+                font-size: 1rem;
+            }
+
             .back-button {
-                font-size: 0.6rem;
-                padding: 8px 16px;
+                font-size: 0.55rem;
+                padding: 8px 12px;
+            }
+
+            .slider-container {
+                height: 45vh;
+                margin: 55px 8px 0 8px;
+            }
+
+            .nav-btn {
+                width: 35px;
+                height: 35px;
+                font-size: 0.8rem;
+            }
+
+            .prev-btn {
+                left: 5px;
+            }
+
+            .next-btn {
+                right: 5px;
+            }
+
+            .caption {
+                font-size: 0.9rem;
+                margin: 12px 8px;
+            }
+
+            .project-description {
+                margin: 15px 8px;
+                padding: 12px;
+            }
+
+            .description-title {
+                font-size: 0.9rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .description-text {
+                font-size: 1rem;
+                margin-bottom: 1rem;
+            }
+
+            .breadcrumbs a, .breadcrumbs .current {
+                font-size: 0.9rem;
+                padding: 4px;
+            }
+
+            .breadcrumbs span {
+                margin: 0 4px;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Landscape orientation on mobile */
+        @media (max-width: 768px) and (orientation: landscape) {
+            .slider-container {
+                height: 70vh;
+                margin-top: 50px;
+            }
+
+            .caption {
+                margin: 10px 15px;
+            }
+
+            .project-description {
+                margin: 15px;
+            }
+        }
+
+        /* Remove hover effects on touch devices */
+        @media (hover: none) and (pointer: coarse) {
+            .nav-btn:hover {
+                transform: translateY(-50%);
+                background: var(--secondary);
+                box-shadow: none;
+            }
+
+            .back-button:hover {
+                transform: none;
+                background: linear-gradient(135deg, var(--secondary), var(--accent));
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            }
+
+            .breadcrumbs a:hover {
+                background-color: rgba(0, 119, 255, 0.2);
             }
         }
     </style>
@@ -259,8 +454,8 @@
         ← Back
     </a>
 
-    <div class="slider-container">
-        <div class="slider">
+    <div class="slider-container" id="sliderContainer">
+        <div class="slider" id="slider">
             <!-- Slide 1 -->
             <div class="slide">
                 <img src="Library_2.png" 
@@ -283,9 +478,11 @@
             </div>
         </div>
         
-        <button class="nav-btn prev-btn" onclick="prevSlide()">❮</button>
-        <button class="nav-btn next-btn" onclick="nextSlide()">❯</button>
+        <button class="nav-btn prev-btn" onclick="prevSlide()" aria-label="Previous slide">❮</button>
+        <button class="nav-btn next-btn" onclick="nextSlide()" aria-label="Next slide">❯</button>
     </div>
+
+    <div class="slide-indicators" id="indicators"></div>
 
     <div class="caption" id="caption">
         Main Page Library
@@ -308,17 +505,65 @@
 
     <script>
         let currentSlide = 0;
-        const slider = document.querySelector('.slider');
+        const slider = document.getElementById('slider');
+        const sliderContainer = document.getElementById('sliderContainer');
         const slides = document.querySelectorAll('.slide');
+        const indicatorsContainer = document.getElementById('indicators');
+        
         const captions = [
             "Main Page Library",
-            "Book List Interface",
+            "Book List Interface", 
             "Library Borrowing System"
         ];
+
+        const descriptions = [
+            {
+                title: "Idea of Khawrizmi Library",
+                text: "This project is named after the great mathematician Al-Khwarizmi, reflecting the project's goal of combining structured logic and educational value towards Library Management System at UNITAR."
+            },
+            {
+                title: "How we developed:",
+                text: "[Frontend:] HTML, CSS, JavaScript. Provides a responsive and interactive user interface for both librarians and users. [Backend:] ASP.NET (.NET Framework) Handles server-side logic, routing, and communication with the database. [Database:] Microsoft Access Used to store and manage library data such as books, users, transactions, and return history. Integrated via ODBC connection to the backend."
+            },
+            {
+                title: "Features",
+                text: "Book Catalog Management, Borrowing and Returning System, Search Functionality and Reports and Logs "
+            }
+        ];
+
+        // Create indicators
+        function createIndicators() {
+            for (let i = 0; i < slides.length; i++) {
+                const indicator = document.createElement('div');
+                indicator.className = 'indicator';
+                indicator.onclick = () => goToSlide(i);
+                indicatorsContainer.appendChild(indicator);
+            }
+            updateIndicators();
+        }
+
+        function updateIndicators() {
+            const indicators = document.querySelectorAll('.indicator');
+            indicators.forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === currentSlide);
+            });
+        }
 
         function updateSlide() {
             slider.style.transform = `translateX(-${currentSlide * 100}%)`;
             document.getElementById('caption').textContent = captions[currentSlide];
+            
+            // Update description
+            document.getElementById('descTitle').textContent = descriptions[currentSlide].title;
+            document.getElementById('descText').textContent = descriptions[currentSlide].text;
+            
+            // Update indicators
+            updateIndicators();
+            
+            // Trigger animation
+            const projectDesc = document.getElementById('projectDesc');
+            projectDesc.classList.remove('visible');
+            setTimeout(() => projectDesc.classList.add('visible'), 50);
         }
 
         function nextSlide() {
@@ -331,56 +576,127 @@
             updateSlide();
         }
 
+        function goToSlide(index) {
+            currentSlide = index;
+            updateSlide();
+        }
+
+        // Touch/swipe functionality
+        let startX = 0;
+        let currentX = 0;
+        let isDragging = false;
+        let startTime = 0;
+
+        sliderContainer.addEventListener('touchstart', handleTouchStart, { passive: true });
+        sliderContainer.addEventListener('touchmove', handleTouchMove, { passive: true });
+        sliderContainer.addEventListener('touchend', handleTouchEnd, { passive: true });
+
+        // Mouse events for desktop
+        sliderContainer.addEventListener('mousedown', handleMouseStart);
+        sliderContainer.addEventListener('mousemove', handleMouseMove);
+        sliderContainer.addEventListener('mouseup', handleMouseEnd);
+        sliderContainer.addEventListener('mouseleave', handleMouseEnd);
+
+        function handleTouchStart(e) {
+            startX = e.touches[0].clientX;
+            isDragging = true;
+            startTime = Date.now();
+            sliderContainer.classList.add('swiping');
+        }
+
+        function handleTouchMove(e) {
+            if (!isDragging) return;
+            currentX = e.touches[0].clientX;
+        }
+
+        function handleTouchEnd(e) {
+            if (!isDragging) return;
+            isDragging = false;
+            sliderContainer.classList.remove('swiping');
+            
+            const deltaX = startX - currentX;
+            const deltaTime = Date.now() - startTime;
+            const velocity = Math.abs(deltaX) / deltaTime;
+            
+            // Swipe threshold
+            if (Math.abs(deltaX) > 50 || velocity > 0.3) {
+                if (deltaX > 0) {
+                    nextSlide();
+                } else {
+                    prevSlide();
+                }
+            }
+        }
+
+        function handleMouseStart(e) {
+            startX = e.clientX;
+            isDragging = true;
+            startTime = Date.now();
+            sliderContainer.classList.add('swiping');
+            e.preventDefault();
+        }
+
+        function handleMouseMove(e) {
+            if (!isDragging) return;
+            currentX = e.clientX;
+            e.preventDefault();
+        }
+
+        function handleMouseEnd(e) {
+            if (!isDragging) return;
+            isDragging = false;
+            sliderContainer.classList.remove('swiping');
+            
+            const deltaX = startX - currentX;
+            const deltaTime = Date.now() - startTime;
+            const velocity = Math.abs(deltaX) / deltaTime;
+            
+            if (Math.abs(deltaX) > 50 || velocity > 0.3) {
+                if (deltaX > 0) {
+                    nextSlide();
+                } else {
+                    prevSlide();
+                }
+            }
+        }
+
         // Keyboard navigation
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowLeft') prevSlide();
             if (e.key === 'ArrowRight') nextSlide();
         });
 
-        const descriptions = [
-            {
-                title: "Idea of Khawrizmi Library",
-                text: "This project is named after the great mathematician Al-Khwarizmi, reflecting the project’s goal of combining structured logic and educational value towards Library Management System at UNITAR."
-            },
-            {
-                title: "How we developed:",
-                text: "[Frontend:] HTML, CSS, JavaScript. Provides a responsive and interactive user interface for both librarians and users. [Backend:] ASP.NET (.NET Framework) Handles server-side logic, routing, and communication with the database. [Database:] Microsoft Access Used to store and manage library data such as books, users, transactions, and return history. Integrated via ODBC connection to the backend."
-            },
-            {
-                title: "Features",
-                text: "Book Catalog Management, Borrowing and Returning System, Search Functionality and Reports and Logs "
-            }
-        ];
-
-        // Add these variables
-        const projectDesc = document.getElementById('projectDesc');
-        const descTitle = document.getElementById('descTitle');
-        const descText = document.getElementById('descText');
-
-        // Modify the updateSlide function
-        function updateSlide() {
-            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
-            document.getElementById('caption').textContent = captions[currentSlide];
-            
-            // Update description
-            descTitle.textContent = descriptions[currentSlide].title;
-            descText.textContent = descriptions[currentSlide].text;
-            
-            // Trigger animation
-            projectDesc.classList.remove('visible');
-            setTimeout(() => projectDesc.classList.add('visible'), 50);
+        // Auto-play functionality (optional)
+        let autoPlayInterval;
+        function startAutoPlay() {
+            autoPlayInterval = setInterval(nextSlide, 5000);
         }
 
-        // Add scroll reveal effect
+        function stopAutoPlay() {
+            clearInterval(autoPlayInterval);
+        }
+
+        // Pause auto-play when user interacts
+        sliderContainer.addEventListener('mouseenter', stopAutoPlay);
+        sliderContainer.addEventListener('mouseleave', startAutoPlay);
+        sliderContainer.addEventListener('touchstart', stopAutoPlay);
+
+        // Scroll reveal effect
         window.addEventListener('scroll', () => {
+            const projectDesc = document.getElementById('projectDesc');
             const descPosition = projectDesc.getBoundingClientRect();
             if (descPosition.top < window.innerHeight * 0.8) {
                 projectDesc.classList.add('visible');
             }
         });
 
-        // Initialize the first slide
-        updateSlide();
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            createIndicators();
+            updateSlide();
+            // Uncomment to enable auto-play
+            // startAutoPlay();
+        });
     </script>
 </body>
 </html>
