@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,16 +9,14 @@
         @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
 
         :root {
-            --bg-color: #040f1f;
-            --text-color: #e0f0ff;
-            --accent-color: #4b9fff;
-            --secondary-color: #00e5ff;
-            --surface-color: #071b33;
-            --gradient-start: #081d35;
-            --gradient-end: #02080f;
+            --primary: #3533cd;
+            --secondary: #00e5ff;
+            --accent: #74b9ff;
+            --card-bg: rgba(255, 255, 255, 0.1);
+            --text-light: #ffffff;
             --header-font: 'Press Start 2P', cursive;
             --body-font: 'VT323', monospace;
-            --glow-color: rgba(0, 149, 255, 0.5);
+            --glow-color: rgba(0, 229, 255, 0.3);
         }
 
         * {
@@ -28,17 +27,27 @@
         }
 
         body {
-            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
-            color: var(--text-color);
+            line-height: 1.6;
+            background: linear-gradient(180deg, #3533cd 0%, #000000 100%);
+            color: var(--text-light);
             font-size: 1.2rem;
             overflow-x: hidden;
             position: relative;
-            line-height: 1.6;
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
             -webkit-overflow-scrolling: touch;
         }
 
-        h1, h2, h3, .back-button {
+        main {
+            flex: 1;
+            position: relative;
+        }
+
+        h1,
+        h2,
+        h3,
+        .back-button {
             font-family: var(--header-font);
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -47,111 +56,110 @@
 
         .back-button {
             position: fixed;
-            top: 15px;
-            left: 15px;
-            background: linear-gradient(135deg, #0055aa, #003366);
-            color: var(--secondary-color);
-            padding: 12px 16px;
-            border-radius: 8px;
+            top: 20px;
+            left: 20px;
+            background: var(--secondary);
+            color: var(--text-light);
+            padding: 12px 20px;
+            border-radius: 0px;
             text-decoration: none;
-            font-weight: 600;
+            border: 3px solid #000;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            box-shadow: 0 0 15px var(--glow-color);
-            transition: all 0.3s ease;
-            z-index: 100;
-            font-size: 0.6rem;
-            border: 1px solid var(--secondary-color);
-            min-height: 44px;
-            min-width: 80px;
+            box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            font-size: 0.7rem;
+            min-height: auto;
+            min-width: auto;
         }
-        
-        .back-button:hover,
+
+        .back-button:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.8);
+            color: var(--text-light);
+        }
+
         .back-button:active {
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px var(--accent-color);
-            text-shadow: 0 0 5px var(--accent-color);
-            background: linear-gradient(135deg, #0066cc, #004080);
+            transform: translateY(2px);
+            box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.8);
         }
 
         .title {
             position: fixed;
-            top: 15px;
+            top: 25px;
             left: 50%;
             transform: translateX(-50%);
-            font-size: clamp(0.7rem, 3vw, 1.2rem);
-            z-index: 100;
-            text-shadow: 0 0 10px var(--glow-color);
-            color: var(--secondary-color);
+            font-size: clamp(0.7rem, 3vw, 1.5rem);
+            z-index: 1000;
+            text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.8);
+            color: var(--text-light);
             white-space: nowrap;
             padding: 0 10px;
         }
 
         .breadcrumbs {
             position: fixed;
-            bottom: 15px;
-            left: 50%; 
+            bottom: 20px;
+            left: 50%;
             transform: translateX(-50%);
             display: flex;
             gap: 5px;
-            font-size: 0.9rem;
-            z-index: 100;
-            padding: 8px 16px;
-            background: rgba(7, 27, 51, 0.8);
-            border-radius: 20px;
-            border: 1px solid var(--accent-color);
+            font-size: 1rem;
+            z-index: 1000;
+            padding: 10px 20px;
+            background: rgba(0, 0, 0, 0.9);
+            border-radius: 0px;
+            border: 2px solid black;
+            box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(10px);
+            white-space: nowrap;
         }
 
         .breadcrumbs a {
-            color: var(--accent-color);
+            color: var(--accent);
             text-decoration: none;
             transition: all 0.3s ease;
             font-family: var(--body-font);
-            text-shadow: 0 0 5px var(--glow-color);
             padding: 4px 8px;
-            border-radius: 4px;
-            min-height: 32px;
-            display: flex;
-            align-items: center;
         }
 
-        .breadcrumbs a:hover,
-        .breadcrumbs a:active {
-            color: var(--secondary-color);
-            text-shadow: 0 0 8px var(--glow-color);
-            background: rgba(0, 149, 255, 0.1);
+        .breadcrumbs a:hover {
+            color: var(--secondary);
         }
 
         .breadcrumbs span {
-            color: rgba(225, 240, 255, 0.7);
+            color: var(--text-light);
             font-family: var(--body-font);
             display: flex;
             align-items: center;
         }
 
         .breadcrumbs .current {
-            color: #87c3ff;
+            color: var(--secondary);
         }
 
         .slider-container {
             position: relative;
-            height: 100vh;
+            min-height: 100vh;
             width: 100%;
+            display: grid;
             overflow: hidden;
             touch-action: pan-y;
         }
 
         .slide {
-            position: absolute;
+            grid-area: 1 / 1;
             width: 100%;
-            height: 100vh;
+            min-height: calc(100vh - 100px);
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 80px 20px 100px;
+            padding: 100px 20px 120px;
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.5s ease;
@@ -165,53 +173,89 @@
         }
 
         .mac-container {
-            width: 100%;
-            max-width: 500px;
-            border-radius: 15px;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            position: relative;
             overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 2px solid var(--accent-color);
-            box-shadow: 0 0 20px var(--glow-color);
+            border-radius: 12px;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            max-width: 500px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
             margin-bottom: 20px;
         }
 
-        .mac-container:hover,
-        .mac-container:active {
-            transform: scale(1.02);
-            box-shadow: 0 0 30px var(--accent-color);
+        .mac-container:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
 
         .mac-container img {
             width: 100%;
             height: auto;
-            display: block;
-            transition: transform 0.3s ease;
+            border-radius: 12px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .mac-container:hover img {
+            transform: scale(1.05);
+        }
+
+        .mac-container::after {
+            content: 'Click to View';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(53, 51, 205, 0.7);
+            color: var(--text-light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-family: var(--header-font);
+            font-size: 0.7rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .mac-container:hover::after {
+            opacity: 1;
         }
 
         .content {
-            width: 100%;
-            max-width: 500px;
-            padding: 25px;
-            background: rgba(7, 27, 51, 0.8);
-            border: 1px solid var(--accent-color);
-            border-radius: 15px;
-            box-shadow: 0 0 15px rgba(0, 100, 255, 0.2);
+            flex: 1.5;
+            padding: 2rem;
+            background: var(--card-bg);
+            border-radius: 16px;
             backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            max-width: 500px;
             text-align: center;
         }
 
         .content h2 {
             font-size: clamp(1rem, 4vw, 1.3rem);
             margin-bottom: 20px;
-            text-shadow: 0 0 10px var(--glow-color);
-            color: var(--secondary-color);
+            color: var(--secondary);
             line-height: 1.3;
+            text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.8);
         }
 
         .content p {
             margin-bottom: 12px;
             line-height: 1.6;
             font-size: clamp(1rem, 3vw, 1.2rem);
+            color: var(--text-light);
+        }
+
+        .content p strong {
+            color: var(--accent);
         }
 
         .content p:last-child {
@@ -232,30 +276,19 @@
             width: 16px;
             height: 16px;
             border-radius: 50%;
-            background-color: rgba(75, 159, 255, 0.3);
+            background-color: rgba(255, 255, 255, 0.1);
             cursor: pointer;
             transition: all 0.3s ease;
-            border: 1px solid var(--accent-color);
-            box-shadow: 0 0 5px var(--glow-color);
-            min-height: 44px;
-            min-width: 44px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .dot::before {
-            content: '';
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            background-color: rgba(75, 159, 255, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .dot.active::before {
-            background-color: var(--accent-color);
-            box-shadow: 0 0 10px var(--accent-color);
+        .dot.active {
+            background-color: var(--secondary);
+            box-shadow: 0 0 15px var(--secondary);
+            border-color: var(--secondary);
         }
 
         /* Navigation Arrows */
@@ -264,18 +297,17 @@
             top: 50%;
             transform: translateY(-50%);
             font-size: 1.5rem;
-            color: var(--secondary-color);
+            color: var(--text-light);
             cursor: pointer;
-            z-index: 100;
+            z-index: 1000;
             padding: 15px;
             opacity: 0.8;
             transition: all 0.3s ease;
             font-family: var(--header-font);
-            background: linear-gradient(135deg, rgba(0, 85, 170, 0.8), rgba(0, 51, 102, 0.8));
-            border: 1px solid var(--secondary-color);
+            background: rgba(0, 0, 0, 0.9);
+            border: 2px solid black;
             border-radius: 50%;
-            box-shadow: 0 0 15px var(--glow-color);
-            text-shadow: 0 0 5px var(--glow-color);
+            box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(10px);
             min-height: 60px;
             min-width: 60px;
@@ -284,12 +316,10 @@
             justify-content: center;
         }
 
-        .arrow:hover,
-        .arrow:active {
-            opacity: 1;
-            box-shadow: 0 0 25px var(--accent-color);
-            text-shadow: 0 0 10px var(--accent-color);
-            transform: translateY(-50%) scale(1.05);
+        .arrow:hover {
+            background: var(--primary);
+            color: var(--secondary);
+            transform: translateY(-50%) scale(1.1);
         }
 
         .prev {
@@ -300,7 +330,47 @@
             right: 20px;
         }
 
-        /* Desktop styles */
+        footer {
+            background: #000;
+            color: var(--text-light);
+            padding: 2rem 1rem;
+            text-align: center;
+            font-family: var(--body-font);
+            position: relative;
+            z-index: 1000;
+            margin-top: auto;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            color: var(--text-light);
+            text-decoration: none;
+            transition: transform 0.3s ease;
+            font-family: var(--header-font);
+            font-size: clamp(0.6rem, 2vw, 0.8rem);
+            padding: 0.5rem;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px);
+            color: var(--secondary);
+        }
+
+        .social-links svg {
+            margin-right: 0.5rem;
+            width: 20px;
+            height: 20px;
+        }
+
         @media (min-width: 768px) {
             .slide {
                 flex-direction: row;
@@ -466,16 +536,16 @@
             .mac-container {
                 cursor: pointer;
             }
-            
+
             .arrow {
                 opacity: 0.9;
             }
-            
+
             .dot {
                 width: 20px;
                 height: 20px;
             }
-            
+
             .dot::before {
                 width: 20px;
                 height: 20px;
@@ -483,7 +553,9 @@
         }
 
         /* High DPI displays */
-        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+        @media (-webkit-min-device-pixel-ratio: 2),
+        (min-resolution: 192dpi) {
+
             .back-button,
             .arrow,
             .dot {
@@ -527,11 +599,19 @@
         }
 
         @keyframes fadeInOut {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 0.8; }
+
+            0%,
+            100% {
+                opacity: 0.3;
+            }
+
+            50% {
+                opacity: 0.8;
+            }
         }
     </style>
 </head>
+
 <body>
     <!-- Home Button -->
     <a href="index.html" class="back-button">
@@ -539,317 +619,359 @@
     </a>
 
     <h1 class="title">SELECTED PROJECT</h1>
-    
+
     <!-- Navigation Arrows -->
     <div class="arrow prev" tabindex="0" role="button" aria-label="Previous project">❮</div>
     <div class="arrow next" tabindex="0" role="button" aria-label="Next project">❯</div>
 
     <!-- Slider container -->
-    <div class="slider-container">
-        <!-- Khawarizmi Library Slide -->
-        <div class="slide active">
-            <a href="Khawarizmi Library.html" class="mac-container" tabindex="0">
-                <img src="Preview_Library_bg.png" alt="Khawarizmi Library Preview" loading="lazy">
-            </a>
-            <div class="content">
-                <h2>KHAWARIZMI LIBRARY</h2>
-                <p><strong>The description:</strong></p>
-                <p>Khawarizmi Library System is a modern and user-friendly library management solution designed to efficiently organize, track, and manage books and users at UNITAR.</p>
-                <p>The system allows librarians to easily catalog books, manage borrow and return transactions, and monitor overdue items.</p>
-                <p>Users can browse the digital catalog, search for books by title, author, or genre, and check availability in real-time.</p>
+    <main>
+        <div class="slider-container">
+            <!-- Khawarizmi Library Slide -->
+            <div class="slide active">
+                <a href="Khawarizmi Library.html" class="mac-container" tabindex="0">
+                    <img src="Preview_Library_bg.png" alt="Khawarizmi Library Preview" loading="lazy">
+                </a>
+                <div class="content">
+                    <h2>KHAWARIZMI LIBRARY</h2>
+                    <p><strong>The description:</strong></p>
+                    <p>Khawarizmi Library System is a modern and user-friendly library management solution designed to
+                        efficiently organize, track, and manage books and users at UNITAR.</p>
+                    <p>The system allows librarians to easily catalog books, manage borrow and return transactions, and
+                        monitor overdue items.</p>
+                    <p>Users can browse the digital catalog, search for books by title, author, or genre, and check
+                        availability in real-time.</p>
+                </div>
+            </div>
+
+            <!-- Traffic Chaos Slide -->
+            <div class="slide">
+                <a href="Traffic Chaos.html" class="mac-container" tabindex="0">
+                    <img src="Preview_TC_bg.png" alt="Traffic Chaos Game Preview" loading="lazy">
+                </a>
+                <div class="content">
+                    <h2>TRAFFIC CHAOS</h2>
+                    <p><strong>The description:</strong></p>
+                    <p>An exciting traffic management game where players control traffic lights to prevent accidents and
+                        keep traffic flowing smoothly.</p>
+                    <p>Challenge your reflexes and strategic thinking as traffic gets increasingly chaotic.</p>
+                    <p>Developed using HTML, CSS, and JavaScript with engaging gameplay mechanics.</p>
+                </div>
+            </div>
+
+            <!-- Gomoku Slide -->
+            <div class="slide">
+                <a href="https://gomoku-game-three.vercel.app/" class="mac-container" tabindex="0">
+                    <img src="Gomoku_Preview.png" alt="Gomoku Preview" loading="lazy">
+                </a>
+                <div class="content">
+                    <h2>GOMOKU GAME</h2>
+                    <p><strong>The description:</strong></p>
+                    <p>A classic board game for two players where the objective is to be the first to get five of your
+                        pieces in a row.</p>
+                    <p>Players alternate placing X and O markers on the board. The first player to achieve five
+                        consecutive
+                        pieces horizontally, vertically, or diagonally wins.</p>
+                    <p>Developed using HTML, CSS, and JavaScript with intelligent game logic and responsive design.</p>
+                </div>
+            </div>
+
+            <!-- VentureVille Slide -->
+            <div class="slide">
+                <a href="https://ventureville.vercel.app/" class="mac-container" tabindex="0" target="_blank">
+                    <img src="https://s0.wp.com/mshots/v1/https://ventureville.vercel.app/?w=800&h=600"
+                        alt="VentureVille Preview" loading="lazy">
+                </a>
+                <div class="content">
+                    <h2>VENTUREVILLE</h2>
+                    <p><strong>The description:</strong></p>
+                    <p>An interactive TVET Entrepreneurship Workshop simulation. Explore a 3D workshop world, collect
+                        tools,
+                        and learn essential business skills through immersive gameplay.</p>
+                    <p>Designed to provide hands-on entrepreneurial training in a virtual environment, featuring
+                        multiple
+                        zones and challenges.</p>
+                    <p>Built with advanced 3D web technologies for a truly engaging educational experience.</p>
+                </div>
+            </div>
+
+            <!-- LensIA Studio Slide -->
+            <div class="slide">
+                <a href="https://lens-ia-studio.vercel.app/" class="mac-container" tabindex="0" target="_blank">
+                    <img src="https://s0.wp.com/mshots/v1/https://lens-ia-studio.vercel.app/?w=800&h=600"
+                        alt="LensIA Studio Preview" loading="lazy">
+                </a>
+                <div class="content">
+                    <h2>LENSIA STUDIO</h2>
+                    <p><strong>The description:</strong></p>
+                    <p>A professional photography service application showcasing a premium portfolio of portrait, event,
+                        and
+                        product photography.</p>
+                    <p>Features a sleek, artistic gallery and a streamlined booking system for clients to schedule their
+                        photography sessions with ease.</p>
+                    <p>Developed with a focus on visual excellence and user-friendly service management.</p>
+                </div>
+            </div>
+
+            <!-- Denali & Pinnacles Slide -->
+            <div class="slide">
+                <a href="https://denali-and-pinnacles.vercel.app/" class="mac-container" tabindex="0" target="_blank">
+                    <img src="https://s0.wp.com/mshots/v1/https://denali-and-pinnacles.vercel.app/?w=800&h=600"
+                        alt="Denali & Pinnacles Preview" loading="lazy">
+                </a>
+                <div class="content">
+                    <h2>DENALI & PINNACLES</h2>
+                    <p><strong>The description:</strong></p>
+                    <p>A business landing page and booking system for a bohemian-themed cafe, highlighting artisan
+                        coffee
+                        and wholesome eats.</p>
+                    <p>Includes an integrated table reservation feature and detailed menu information to enhance the
+                        customer experience.</p>
+                    <p>Combines a unique aesthetic design with practical business functionality.</p>
+                </div>
             </div>
         </div>
 
-        <!-- Traffic Chaos Slide -->
-        <div class="slide">
-            <a href="Traffic Chaos.html" class="mac-container" tabindex="0">
-                <img src="Preview_TC_bg.png" alt="Traffic Chaos Game Preview" loading="lazy">
-            </a>
-            <div class="content">
-                <h2>TRAFFIC CHAOS</h2>
-                <p><strong>The description:</strong></p>
-                <p>An exciting traffic management game where players control traffic lights to prevent accidents and keep traffic flowing smoothly.</p>
-                <p>Challenge your reflexes and strategic thinking as traffic gets increasingly chaotic.</p>
-                <p>Developed using HTML, CSS, and JavaScript with engaging gameplay mechanics.</p>
-            </div>
-        </div>
-
-        <!-- Gomoku Slide -->
-        <div class="slide">
-            <a href="https://gomoku-ai-sigma.vercel.app/" class="mac-container" tabindex="0">
-                <img src="Gomoku_Preview.png" alt="Gomoku Preview" loading="lazy">
-            </a>
-            <div class="content">
-                <h2>GOMOKU GAME</h2>
-                <p><strong>The description:</strong></p>
-                <p>A classic board game for two players where the objective is to be the first to get five of your pieces in a row.</p>
-                <p>Players alternate placing X and O markers on the board. The first player to achieve five consecutive pieces horizontally, vertically, or diagonally wins.</p>
-                <p>Developed using HTML, CSS, and JavaScript with intelligent game logic and responsive design.</p>
-            </div>
-        </div>
-
-        <!-- VentureVille Slide -->
-        <div class="slide">
-            <a href="https://ventureville.vercel.app/" class="mac-container" tabindex="0" target="_blank">
-                <img src="https://s0.wp.com/mshots/v1/https://ventureville.vercel.app/?w=800&h=600" alt="VentureVille Preview" loading="lazy">
-            </a>
-            <div class="content">
-                <h2>VENTUREVILLE</h2>
-                <p><strong>The description:</strong></p>
-                <p>An interactive TVET Entrepreneurship Workshop simulation. Explore a 3D workshop world, collect tools, and learn essential business skills through immersive gameplay.</p>
-                <p>Designed to provide hands-on entrepreneurial training in a virtual environment, featuring multiple zones and challenges.</p>
-                <p>Built with advanced 3D web technologies for a truly engaging educational experience.</p>
-            </div>
-        </div>
-
-        <!-- LensIA Studio Slide -->
-        <div class="slide">
-            <a href="https://lens-ia-studio.vercel.app/" class="mac-container" tabindex="0" target="_blank">
-                <img src="https://s0.wp.com/mshots/v1/https://lens-ia-studio.vercel.app/?w=800&h=600" alt="LensIA Studio Preview" loading="lazy">
-            </a>
-            <div class="content">
-                <h2>LENSIA STUDIO</h2>
-                <p><strong>The description:</strong></p>
-                <p>A professional photography service application showcasing a premium portfolio of portrait, event, and product photography.</p>
-                <p>Features a sleek, artistic gallery and a streamlined booking system for clients to schedule their photography sessions with ease.</p>
-                <p>Developed with a focus on visual excellence and user-friendly service management.</p>
-            </div>
-        </div>
-
-        <!-- Denali & Pinnacles Slide -->
-        <div class="slide">
-            <a href="https://denali-and-pinnacles.vercel.app/" class="mac-container" tabindex="0" target="_blank">
-                <img src="https://s0.wp.com/mshots/v1/https://denali-and-pinnacles.vercel.app/?w=800&h=600" alt="Denali & Pinnacles Preview" loading="lazy">
-            </a>
-            <div class="content">
-                <h2>DENALI & PINNACLES</h2>
-                <p><strong>The description:</strong></p>
-                <p>A business landing page and booking system for a bohemian-themed cafe, highlighting artisan coffee and wholesome eats.</p>
-                <p>Includes an integrated table reservation feature and detailed menu information to enhance the customer experience.</p>
-                <p>Combines a unique aesthetic design with practical business functionality.</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="breadcrumbs">
-        <div class="breadcrumbs-container">
+        <div class="breadcrumbs">
             <a href="index.html">Home</a>
             <span>></span>
             <span class="current">Selected Project</span>
         </div>
-    </div>
 
-    <!-- Pagination dots - NOW HAS 6 DOTS FOR 6 SLIDES -->
-    <div class="pagination">
-        <div class="dot active" data-index="0" tabindex="0" role="button" aria-label="Go to project 1"></div>
-        <div class="dot" data-index="1" tabindex="0" role="button" aria-label="Go to project 2"></div>
-        <div class="dot" data-index="2" tabindex="0" role="button" aria-label="Go to project 3"></div>
-        <div class="dot" data-index="3" tabindex="0" role="button" aria-label="Go to project 4"></div>
-        <div class="dot" data-index="4" tabindex="0" role="button" aria-label="Go to project 5"></div>
-        <div class="dot" data-index="5" tabindex="0" role="button" aria-label="Go to project 6"></div>
-    </div>
+        <!-- Pagination dots - NOW HAS 6 DOTS FOR 6 SLIDES -->
+        <div class="pagination">
+            <div class="dot active" data-index="0" tabindex="0" role="button" aria-label="Go to project 1"></div>
+            <div class="dot" data-index="1" tabindex="0" role="button" aria-label="Go to project 2"></div>
+            <div class="dot" data-index="2" tabindex="0" role="button" aria-label="Go to project 3"></div>
+            <div class="dot" data-index="3" tabindex="0" role="button" aria-label="Go to project 4"></div>
+            <div class="dot" data-index="4" tabindex="0" role="button" aria-label="Go to project 5"></div>
+            <div class="dot" data-index="5" tabindex="0" role="button" aria-label="Go to project 6"></div>
+        </div>
 
-    <!-- Swipe hint for mobile -->
-    <div class="swipe-hint">← Swipe or use arrows to navigate →</div>
+        <!-- Swipe hint for mobile -->
+        <div class="swipe-hint">← Swipe or use arrows to navigate →</div>
 
-    <script>
-        // Get DOM elements
-        const slides = document.querySelectorAll('.slide');
-        const dots = document.querySelectorAll('.dot');
-        const prevBtn = document.querySelector('.prev');
-        const nextBtn = document.querySelector('.next');
-        const sliderContainer = document.querySelector('.slider-container');
-        
-        let currentIndex = 0;
-        const totalSlides = slides.length;
-        let touchStartX = 0;
-        let touchEndX = 0;
-        let isTransitioning = false;
+        <footer>
+            <p>&copy; 2026 Hafiz Ismail. All rights reserved.</p>
+            <div class="social-links">
+                <a href="mailto:hafismail17@gmail.com">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                    Email Me
+                </a>
+                <a href="http://linkedin.com/in/hafizsierota" target="_blank">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                        <rect x="2" y="9" width="4" height="12"></rect>
+                        <circle cx="4" cy="4" r="2"></circle>
+                    </svg>
+                    LinkedIn
+                </a>
+            </div>
+        </footer>
 
-        // Function to show a specific slide
-        function showSlide(index) {
-            if (isTransitioning) return;
-            
-            isTransitioning = true;
-            
-            // Hide all slides
-            slides.forEach(slide => {
-                slide.classList.remove('active');
-            });
-            
-            // Deactivate all dots
+        <script>
+            // Get DOM elements
+            const slides = document.querySelectorAll('.slide');
+            const dots = document.querySelectorAll('.dot');
+            const prevBtn = document.querySelector('.prev');
+            const nextBtn = document.querySelector('.next');
+            const sliderContainer = document.querySelector('.slider-container');
+
+            let currentIndex = 0;
+            const totalSlides = slides.length;
+            let touchStartX = 0;
+            let touchEndX = 0;
+            let isTransitioning = false;
+
+            // Function to show a specific slide
+            function showSlide(index) {
+                if (isTransitioning) return;
+
+                isTransitioning = true;
+
+                // Hide all slides
+                slides.forEach(slide => {
+                    slide.classList.remove('active');
+                });
+
+                // Deactivate all dots
+                dots.forEach(dot => {
+                    dot.classList.remove('active');
+                });
+
+                // Show selected slide and activate corresponding dot
+                slides[index].classList.add('active');
+                dots[index].classList.add('active');
+
+                currentIndex = index;
+
+                // Reset transition lock after animation completes
+                setTimeout(() => {
+                    isTransitioning = false;
+                }, 500);
+            }
+
+            // Event listeners for dots
             dots.forEach(dot => {
-                dot.classList.remove('active');
-            });
-            
-            // Show selected slide and activate corresponding dot
-            slides[index].classList.add('active');
-            dots[index].classList.add('active');
-            
-            currentIndex = index;
-            
-            // Reset transition lock after animation completes
-            setTimeout(() => {
-                isTransitioning = false;
-            }, 500);
-        }
-
-        // Event listeners for dots
-        dots.forEach(dot => {
-            dot.addEventListener('click', function() {
-                const index = parseInt(this.getAttribute('data-index'));
-                showSlide(index);
-            });
-            
-            // Keyboard support for dots
-            dot.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
+                dot.addEventListener('click', function () {
                     const index = parseInt(this.getAttribute('data-index'));
                     showSlide(index);
-                }
+                });
+
+                // Keyboard support for dots
+                dot.addEventListener('keydown', function (e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        const index = parseInt(this.getAttribute('data-index'));
+                        showSlide(index);
+                    }
+                });
             });
-        });
 
-        // Event listeners for arrow buttons
-        prevBtn.addEventListener('click', function() {
-            let newIndex = currentIndex - 1;
-            if (newIndex < 0) newIndex = totalSlides - 1;
-            showSlide(newIndex);
-        });
-
-        nextBtn.addEventListener('click', function() {
-            let newIndex = currentIndex + 1;
-            if (newIndex >= totalSlides) newIndex = 0;
-            showSlide(newIndex);
-        });
-
-        // Keyboard support for arrows
-        [prevBtn, nextBtn].forEach(btn => {
-            btn.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    this.click();
-                }
+            // Event listeners for arrow buttons
+            prevBtn.addEventListener('click', function () {
+                let newIndex = currentIndex - 1;
+                if (newIndex < 0) newIndex = totalSlides - 1;
+                showSlide(newIndex);
             });
-        });
 
-        // Touch/swipe support
-        sliderContainer.addEventListener('touchstart', function(e) {
-            touchStartX = e.changedTouches[0].screenX;
-        }, { passive: true });
+            nextBtn.addEventListener('click', function () {
+                let newIndex = currentIndex + 1;
+                if (newIndex >= totalSlides) newIndex = 0;
+                showSlide(newIndex);
+            });
 
-        sliderContainer.addEventListener('touchend', function(e) {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        }, { passive: true });
+            // Keyboard support for arrows
+            [prevBtn, nextBtn].forEach(btn => {
+                btn.addEventListener('keydown', function (e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        this.click();
+                    }
+                });
+            });
 
-        function handleSwipe() {
-            const swipeThreshold = 50;
-            const swipeDistance = touchEndX - touchStartX;
-            
-            if (Math.abs(swipeDistance) < swipeThreshold) return;
-            
-            if (swipeDistance > 0) {
-                // Swipe right - show previous
-                prevBtn.click();
-            } else {
-                // Swipe left - show next
-                nextBtn.click();
-            }
-        }
+            // Touch/swipe support
+            sliderContainer.addEventListener('touchstart', function (e) {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
 
-        // Mouse drag support for desktop
-        let isDragging = false;
-        let dragStartX = 0;
+            sliderContainer.addEventListener('touchend', function (e) {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            }, { passive: true });
 
-        sliderContainer.addEventListener('mousedown', function(e) {
-            isDragging = true;
-            dragStartX = e.clientX;
-            sliderContainer.style.cursor = 'grabbing';
-        });
+            function handleSwipe() {
+                const swipeThreshold = 50;
+                const swipeDistance = touchEndX - touchStartX;
 
-        document.addEventListener('mousemove', function(e) {
-            if (!isDragging) return;
-            e.preventDefault();
-        });
+                if (Math.abs(swipeDistance) < swipeThreshold) return;
 
-        document.addEventListener('mouseup', function(e) {
-            if (!isDragging) return;
-            
-            const dragDistance = e.clientX - dragStartX;
-            const dragThreshold = 50;
-            
-            if (Math.abs(dragDistance) >= dragThreshold) {
-                if (dragDistance > 0) {
+                if (swipeDistance > 0) {
+                    // Swipe right - show previous
                     prevBtn.click();
                 } else {
+                    // Swipe left - show next
                     nextBtn.click();
                 }
             }
-            
-            isDragging = false;
-            sliderContainer.style.cursor = 'default';
-        });
 
-        // Initialize with the first slide
-        showSlide(0);
-        
-        // Keyboard navigation
-        document.addEventListener('keydown', function(e) {
-            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
-            
-            if (e.key === 'ArrowLeft') {
-                e.preventDefault();
-                prevBtn.click();
-            } else if (e.key === 'ArrowRight') {
-                e.preventDefault();
-                nextBtn.click();
-            }
-        });
-        
-        // Add click sound effect
-        function addClickSound() {
-            const clickSound = new Audio('data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAB8AB0A');
-            
-            document.querySelectorAll('a, .dot, .arrow').forEach(element => {
-                element.addEventListener('click', () => {
-                    clickSound.currentTime = 0;
-                    clickSound.play().catch(e => {});
-                });
+            // Mouse drag support for desktop
+            let isDragging = false;
+            let dragStartX = 0;
+
+            sliderContainer.addEventListener('mousedown', function (e) {
+                isDragging = true;
+                dragStartX = e.clientX;
+                sliderContainer.style.cursor = 'grabbing';
             });
-        }
-        
-        // Try to add sound if browser supports it
-        try {
-            addClickSound();
-        } catch (e) {
-            console.log('Sound not supported in this browser');
-        }
 
-        // Auto-hide swipe hint after first interaction
-        let hasInteracted = false;
-        const swipeHint = document.querySelector('.swipe-hint');
+            document.addEventListener('mousemove', function (e) {
+                if (!isDragging) return;
+                e.preventDefault();
+            });
 
-        function hideSwipeHint() {
-            if (!hasInteracted && swipeHint) {
-                hasInteracted = true;
-                swipeHint.style.display = 'none';
+            document.addEventListener('mouseup', function (e) {
+                if (!isDragging) return;
+
+                const dragDistance = e.clientX - dragStartX;
+                const dragThreshold = 50;
+
+                if (Math.abs(dragDistance) >= dragThreshold) {
+                    if (dragDistance > 0) {
+                        prevBtn.click();
+                    } else {
+                        nextBtn.click();
+                    }
+                }
+
+                isDragging = false;
+                sliderContainer.style.cursor = 'default';
+            });
+
+            // Initialize with the first slide
+            showSlide(0);
+
+            // Keyboard navigation
+            document.addEventListener('keydown', function (e) {
+                if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+                if (e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    prevBtn.click();
+                } else if (e.key === 'ArrowRight') {
+                    e.preventDefault();
+                    nextBtn.click();
+                }
+            });
+
+            // Add click sound effect
+            function addClickSound() {
+                const clickSound = new Audio('data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAB8AB0A');
+
+                document.querySelectorAll('a, .dot, .arrow').forEach(element => {
+                    element.addEventListener('click', () => {
+                        clickSound.currentTime = 0;
+                        clickSound.play().catch(e => { });
+                    });
+                });
             }
-        }
 
-        // Hide hint on any interaction
-        [prevBtn, nextBtn, ...dots].forEach(element => {
-            element.addEventListener('click', hideSwipeHint);
-        });
-
-        sliderContainer.addEventListener('touchstart', hideSwipeHint);
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
-                hideSwipeHint();
+            // Try to add sound if browser supports it
+            try {
+                addClickSound();
+            } catch (e) {
+                console.log('Sound not supported in this browser');
             }
-        });
-    </script>
+
+            // Auto-hide swipe hint after first interaction
+            let hasInteracted = false;
+            const swipeHint = document.querySelector('.swipe-hint');
+
+            function hideSwipeHint() {
+                if (!hasInteracted && swipeHint) {
+                    hasInteracted = true;
+                    swipeHint.style.display = 'none';
+                }
+            }
+
+            // Hide hint on any interaction
+            [prevBtn, nextBtn, ...dots].forEach(element => {
+                element.addEventListener('click', hideSwipeHint);
+            });
+
+            sliderContainer.addEventListener('touchstart', hideSwipeHint);
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+                    hideSwipeHint();
+                }
+            });
+        </script>
 </body>
-</html>
 
+</html>
